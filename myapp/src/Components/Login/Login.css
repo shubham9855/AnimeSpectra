@@ -1,0 +1,79 @@
+/* LoginForm.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  /* background-color: white; */
+  background-color: #000a13;
+  /* box-shadow: 4px 0px 30px 2px rgb(72, 71, 71); */
+  background-image: url("../../images/login_page_bg.jpg"); /* The image used */
+  background-color: #cccccc; /* Used if the image is unavailable */
+  height: 520px; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  /* filter: grayscale(50%); */
+}
+
+.login-form {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: white; */
+  padding: 40px;
+  border-radius: 40px;
+  background-color: #000a13;
+  box-shadow: 4px 0px 30px 2px rgb(72, 71, 71);
+}
+
+.login-form h2 {
+  text-align: center;
+  color: #dba570;
+}
+/* 
+.input-group {
+  width: 250px;
+  margin-bottom: 20px;
+} */
+
+.input-group {
+  margin-bottom: 20px;
+  width: 250px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: 1px solid #dba570;
+  background-color: #000a13;
+}
+
+.login-button {
+  width: 150px;
+  padding: 15px 10px;
+  background-color: #dba570;
+  color: #000a13;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  /* margin-left: 10px; */
+}
+
+.login-button:hover {
+  opacity: 0.8;
+}
+
+.login-button:active {
+  background-color: #222;
+}
+
+.toregister {
+  text-decoration: none;
+  margin-top: 15px;
+  /* margin-left: 50px; */
+  color: #dba570;
+}
+.toregister:hover {
+  opacity: 0.6;
+}

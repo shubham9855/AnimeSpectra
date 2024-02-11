@@ -1,0 +1,120 @@
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #000a13;
+  box-shadow: 0px 4px 30px 2px rgb(72, 71, 71);
+  height: 60px;
+  z-index: 100;
+}
+.navbar-logo {
+  color: #dba570;
+  margin-left: 60px;
+  font-family: "Whisper";
+  /* font-size: 10px; */
+}
+.logo-icon {
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #000a13;
+  margin-right: 10px;
+  padding: 8px 20px;
+  font-family: "Roboto";
+  text-decoration: none;
+  color: #dba570;
+  font-size: 16px;
+  font-weight: bold;
+}
+.navbar-middle {
+  display: flex;
+}
+.sneaker-icon {
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: white;
+  margin-right: 10px;
+  padding: 8px 20px;
+  font-family: "Roboto";
+  text-decoration: none;
+  color: #dba570;
+  font-size: 14px;
+}
+.sneaker-icon:hover {
+  background-color: #dba570;
+}
+
+.fav-icon {
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #000a13;
+  padding: 8px 20px;
+  margin-right: 10px;
+  font-family: "Roboto";
+  text-decoration: none;
+  color: #dba570;
+  font-size: 14px;
+}
+.fav-icon:hover {
+  background-color: #dba570;
+  color: #000a13;
+}
+.search-icon {
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-input {
+  border-radius: 20px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #3e3f3f;
+  color: #f5f5f5;
+  width: 300px;
+}
+.search-img {
+  cursor: pointer;
+  margin-left: 5px;
+  height: 16px;
+  width: 16px;
+}
+
+.navbar-mail {
+  font-family: "Roboto";
+  padding: 8px 20px;
+  margin-right: 10px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+.login-icon {
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: white;
+  padding: 8px 10px;
+  margin-right: 30px;
+  font-family: "Roboto";
+  text-decoration: none;
+  color: #dba570;
+  font-size: 14px;
+}
+.login-icon:hover {
+  background-color: #f5f5f5;
+  color: #000a13;
+}
+.image-icon {
+  cursor: pointer;
+  text-decoration: none;
+}
+.cart-image {
+  height: 16px;
+  width: 16px;
+}
