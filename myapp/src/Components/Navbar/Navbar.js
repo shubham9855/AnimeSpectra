@@ -58,7 +58,7 @@ export const Navbar = () => {
           </div>
         </div>
         <div className="navbar-mail">
-          <Link to="/createpost" className="fav-icon">
+          <Link to="/particularcommunity" className="fav-icon">
             Create Post
           </Link>
           <Link to="/communities" className="fav-icon">

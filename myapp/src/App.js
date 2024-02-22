@@ -8,6 +8,8 @@ import { Communities } from "./Components/Communities/Communities";
 import { Login } from "./Components/Login/Login";
 import { Register } from "./Components/Register/Register";
 import { SidebarLayout } from "./Components/SidebarLayout";
+import { Interest } from "./Components/InterestPage/Interest";
+import { ParticularCommunity } from "./Components/ParticularCommunity/ParticularCommunity";
 
 function App() {
   return (
@@ -17,9 +19,14 @@ function App() {
         <Route element={<SidebarLayout />}>
           <Route path="/" Component={Home}></Route>
         </Route>
+        <Route path="/interest" Component={Interest}></Route>
         <Route path="/login" Component={Login}></Route>
         <Route path="/register" Component={Register}></Route>
         <Route path="/communities" Component={Communities}></Route>
+        <Route
+          path="/particularcommunity"
+          Component={ParticularCommunity}
+        ></Route>
       </Routes>
       {/* <Sidebar /> */}
     </div>
