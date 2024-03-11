@@ -11,19 +11,23 @@ export const Communities = () => {
   console.log(CommunityJson);
   return (
     <>
-      <div className="communities-main-container">
-        {Community_list_dec.map((item) => {
-          console.log(item.img);
-          return (
-            <div className="communities-box">
-              <img
-                src={item.img}
-                alt={item.name}
-                className="communities-box-img"
-              />
-            </div>
-          );
-        })}
+      <div className="main-community">
+        <div className="communities-heading">Communities</div>
+        <hr></hr>
+        <div className="communities-main-container">
+          {Community_list_dec.map((item) => {
+            console.log(item.img);
+            return (
+              <div className="communities-box">
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  className="communities-box-img"
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );

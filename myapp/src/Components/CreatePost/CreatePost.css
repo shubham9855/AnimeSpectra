@@ -1,0 +1,234 @@
+.form-main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../images/login_page_bg.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.form-container {
+  background-color: #000a13;
+  /* margin-top: 100px; */
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 400px;
+  border-radius: 13px;
+  padding: 8px;
+  box-shadow: 2px 2px 12px 0px #dba570;
+}
+
+.form-heading {
+  display: flex;
+  /* float: inline-start; */
+  flex-direction: column;
+  margin-top: 16px;
+  padding: 4px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.form-heading-text {
+  display: flex;
+  align-items: self-start;
+  margin-bottom: 16px;
+}
+
+.form-heading-text span {
+  color: #dba570;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.form-heading-line {
+  background-color: white;
+  height: 1px;
+}
+
+.form-dropDown {
+  display: flex;
+  align-items: self-start;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  margin-left: 15px;
+}
+
+.form-dropDown select::after {
+  color: red;
+}
+
+.form-dropDown select {
+  width: 40%;
+  border: none;
+  height: 40px;
+  font-size: 16px;
+  color: #dba570;
+  font-weight: 400;
+  padding-left: 7px;
+  border-radius: 5px;
+  background-color: #031729;
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.form-upload {
+  display: flex;
+  flex-direction: row;
+
+  /* justify-content: space-around; */
+  align-items: self-start;
+  background-color: #000a13;
+  margin-left: 15px;
+}
+
+.form-post {
+  border-right: 1px solid rgb(224, 222, 222);
+
+  cursor: pointer;
+}
+
+.image-button-selected,
+.post-button-selected {
+  border-bottom: 3px solid #dba570;
+}
+
+.image-button-selected span,
+.post-button-selected span {
+  color: #dba570;
+}
+
+.form-post span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.form-image span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.form-post,
+.form-image {
+  width: 30%;
+  height: 31px;
+  background-color: #031729;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.post-create {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.form-title {
+  height: 29px;
+  padding: 8px 10px;
+  text-decoration: none;
+  /* border: none; */
+  border: 1px solid rgb(210, 208, 208);
+  border-radius: 6px;
+  /* padding-left: 10px; */
+  background-color: #031729;
+}
+
+.post-content {
+  /* margin-left: 15px;
+  margin-right: 15px; */
+  height: 100px;
+  border: 1px solid rgb(210, 208, 208);
+  border-radius: 6px;
+  margin-top: 12px;
+  /* padding-left: 10px; */
+  background-color: #031729;
+  padding: 15px 10px;
+}
+
+.form-buttonwrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+.form-button {
+  width: 62.5px;
+  height: 32px;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  background-color: #dba570;
+  color: #000a13;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  opacity: 0.6;
+}
+
+.image-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.drop-container {
+  width: 70%;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  height: 116px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px dashed #555;
+  color: #444;
+}
+
+.drop-container:hover {
+  background: #0f1820;
+}
+
+.drop-container:hover .drop-title {
+  color: #dba570;
+}
+
+.drop-title {
+  color: #ac8359;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: color 0.2s ease-in-out;
+}
+
+.file-input {
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .form-dropDown select {
+    width: 210px;
+  }
+}

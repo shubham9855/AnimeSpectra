@@ -5,7 +5,7 @@
 }
 .particular-header {
   background-color: rgb(1, 61, 41);
-  height: 300px;
+  height: 400px;
   width: 100vw;
   background-image: url("../../images/one-piece.jpg");
   background-position: center; /* Center the image */
@@ -14,20 +14,22 @@
   display: flex;
   /* flex-direction: column; */
   align-items: end;
-  border: 2px solid white;
+  /* border: 2px solid white; */
 }
 .community-thumbnail {
   background-color: #000a13;
-  border: 2px solid white;
+  /* border: 2px solid white; */
   height: 100px;
   width: 100vw;
   display: flex;
-  justify-content: start;
   align-items: center;
+  font-size: 40px;
+  font-weight: 900;
+  padding-left: 50px;
 }
 .community-info {
   background-color: bisque;
-  border: 2px solid white;
+  /* border: 2px solid white; */
   /* height: 50px;
   width: 100vw; */
 }
@@ -37,21 +39,51 @@
   background-size: 60px;
   background-position: center;
   /* background-repeat: no-repeat; */
-  border: 2px solid white;
+  /* border: 2px solid rgb(88, 42, 196); */
   height: 80px;
   width: 80px;
   border-radius: 40px;
+  margin-left: 50px;
 }
 .community-name {
   /* background-color: antiquewhite; */
   /* height: 10px; */
-  border: 2px solid white;
-  font-size: 30px;
+  /* border: 2px solid rgb(228, 35, 35); */
+  font-size: 40px;
+  font-weight: 800;
+  margin-left: 80px;
   /* width: 10px; */
 }
 .particular-body {
-  background-color: blueviolet;
-  height: 500px;
-  border: 2px solid white;
-  width: 500px;
+  /* background-color: blueviolet;
+  height: 500px; */
+  /* border: 2px solid white; */
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+  /* width: 500px; */
+}
+.particular-content {
+  /* background-color: blueviolet; */
+  /* border: 2px solid white; */
+  width: 750px;
+}
+.particular-anime-info {
+  /* background-color: rgb(35, 202, 107); */
+  /* display: flex; */
+  overflow: hidden;
+  overflow-wrap: break-word;
+  /* display: flex;
+  flex-direction: column; */
+  background-color: #000a13;
+  box-shadow: 2px 2px 12px 0px #dba570;
+  border-radius: 20px;
+  padding: 20px;
+  height: fit-content;
+  /* border: 2px solid white; */
+  width: 300px;
+}
+.about-anime-info {
+  font-size: 20px;
+  font-weight: 900;
 }

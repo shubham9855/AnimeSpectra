@@ -11,7 +11,7 @@ export const Sidebar = () => {
   return (
     <>
       <div className="sidebar-main">
-        <div className="sidebar-heading">Top Communities.</div>
+        <div className="sidebar-heading">Top Communities</div>
         {Top_comm.map((item) => {
           return (
             <div className="sidebar-box">

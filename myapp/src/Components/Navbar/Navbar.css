@@ -8,47 +8,30 @@
   right: 0px;
   background-color: #000a13;
   box-shadow: 0px 4px 30px 2px rgb(72, 71, 71);
-  height: 60px;
+  height: 70px;
   z-index: 100;
+  padding: 0rem 3.4rem;
 }
-.navbar-logo {
-  color: #dba570;
-  margin-left: 60px;
-  font-family: "Whisper";
-  /* font-size: 10px; */
+.navbar-logo-img {
+  /* border: 2px solid white; */
+  height: 40px;
+  width: 40px;
 }
 .logo-icon {
-  border: none;
-  border-radius: 20px;
+  /* border: 2px solid white; */
   cursor: pointer;
-  background-color: #000a13;
-  margin-right: 10px;
-  padding: 8px 20px;
-  font-family: "Roboto";
+  display: flex;
+  align-items: center;
   text-decoration: none;
+}
+.logo-icon span {
   color: #dba570;
   font-size: 16px;
   font-weight: bold;
-}
-.navbar-middle {
-  display: flex;
-}
-.sneaker-icon {
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  background-color: white;
-  margin-right: 10px;
-  padding: 8px 20px;
   font-family: "Roboto";
-  text-decoration: none;
-  color: #dba570;
-  font-size: 14px;
+  /* border: 2px solid white; */
+  margin-left: 10px;
 }
-.sneaker-icon:hover {
-  background-color: #dba570;
-}
-
 .fav-icon {
   border: none;
   border-radius: 20px;
@@ -65,56 +48,29 @@
   background-color: #dba570;
   color: #000a13;
 }
-.search-icon {
-  margin-left: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.search-input {
-  border-radius: 20px;
-  padding: 10px 15px;
-  border: none;
-  background-color: #3e3f3f;
-  color: #f5f5f5;
-  width: 300px;
-}
-.search-img {
-  cursor: pointer;
-  margin-left: 5px;
-  height: 16px;
-  width: 16px;
-}
-
 .navbar-mail {
   font-family: "Roboto";
-  padding: 8px 20px;
-  margin-right: 10px;
-  font-size: 12px;
   display: flex;
   align-items: center;
+  /* border: 2px solid white; */
 }
-.login-icon {
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  background-color: white;
-  padding: 8px 10px;
-  margin-right: 30px;
-  font-family: "Roboto";
-  text-decoration: none;
+.menu-icon i {
   color: #dba570;
-  font-size: 14px;
+  font-weight: 900;
+  font-size: 1.5rem;
+  display: none;
 }
-.login-icon:hover {
-  background-color: #f5f5f5;
-  color: #000a13;
-}
-.image-icon {
-  cursor: pointer;
-  text-decoration: none;
-}
-.cart-image {
-  height: 16px;
-  width: 16px;
+
+@media (max-width: 767px) {
+  .navbar-mail .fav-icon {
+    display: none;
+  }
+  .menu-icon i {
+    display: block;
+    border: none;
+    cursor: pointer;
+    color: #dba570;
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
 }

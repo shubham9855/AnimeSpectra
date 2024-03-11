@@ -10,6 +10,7 @@ import { Register } from "./Components/Register/Register";
 import { SidebarLayout } from "./Components/SidebarLayout";
 import { Interest } from "./Components/InterestPage/Interest";
 import { ParticularCommunity } from "./Components/ParticularCommunity/ParticularCommunity";
+import { CreatePost } from "./Components/CreatePost/CreatePost";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" Component={Login}></Route>
         <Route path="/register" Component={Register}></Route>
         <Route path="/communities" Component={Communities}></Route>
+        <Route path="/createpost" Component={CreatePost}></Route>
         <Route
           path="/particularcommunity"
           Component={ParticularCommunity}
