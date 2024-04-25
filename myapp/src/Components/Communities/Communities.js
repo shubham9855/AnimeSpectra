@@ -3,6 +3,7 @@ import one_piece from "../../images/one-piece.jpg";
 // import naruto from "../../images/naruto.jpeg";
 // import solo_leveling from "../../images/solo_leveling.jpeg";
 import CommunityJson from "../../CommunityJson";
+import { Link } from "react-router-dom";
 
 export const Communities = () => {
   const Community_list_dec = CommunityJson.slice().sort(
@@ -18,13 +19,18 @@ export const Communities = () => {
           {Community_list_dec.map((item) => {
             console.log(item.img);
             return (
-              <div className="communities-box">
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  className="communities-box-img"
-                />
-              </div>
+              <Link
+                to={`/communities/${item.id}`}
+                className="link-community-box"
+              >
+                <div className="communities-box">
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    className="communities-box-img"
+                  />
+                </div>
+              </Link>
             );
           })}
         </div>

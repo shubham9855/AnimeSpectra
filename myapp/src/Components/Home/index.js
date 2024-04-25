@@ -1,7 +1,12 @@
 import { HomePost } from "../HomePost";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 export const Home = () => {
+  const navigate = useNavigate();
+  const handleFocus = () => {
+    navigate("/createpost");
+  };
   return (
     <>
       <div className="home-main-container">
@@ -17,6 +22,7 @@ export const Home = () => {
               <textarea
                 className="post-input-field"
                 placeholder="What's on your Mind !!!"
+                onFocus={handleFocus}
               />
             </div>
           </div>

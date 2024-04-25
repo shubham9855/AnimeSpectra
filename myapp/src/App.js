@@ -11,6 +11,8 @@ import { SidebarLayout } from "./Components/SidebarLayout";
 import { Interest } from "./Components/InterestPage/Interest";
 import { ParticularCommunity } from "./Components/ParticularCommunity/ParticularCommunity";
 import { CreatePost } from "./Components/CreatePost/CreatePost";
+import Post from "./Components/Post/Post";
+import Comment from "./Components/Comment/Comment";
 
 function App() {
   return (
@@ -25,10 +27,8 @@ function App() {
         <Route path="/register" Component={Register}></Route>
         <Route path="/communities" Component={Communities}></Route>
         <Route path="/createpost" Component={CreatePost}></Route>
-        <Route
-          path="/particularcommunity"
-          Component={ParticularCommunity}
-        ></Route>
+        {/* <Route path="/createpost" Component={Post}></Route> */}
+        <Route path="/communities/:id" Component={ParticularCommunity}></Route>
       </Routes>
       {/* <Sidebar /> */}
     </div>

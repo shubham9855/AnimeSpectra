@@ -39,6 +39,7 @@
   background-color: white;
 }
 .createpost-input {
+  flex: 1;
   width: 95%;
 }
 .post-input-field {

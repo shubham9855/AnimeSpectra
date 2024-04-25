@@ -1,9 +1,11 @@
 import "./CreatePost.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const CreatePost = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [imageUpload, setImageUpload] = useState(false);
+
+  useEffect(() => {}, []);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -61,6 +63,7 @@ export const CreatePost = () => {
             <form className="post-create">
               <input
                 className="form-title"
+                autoFocus
                 placeholder="Title"
                 type="text"
               ></input>

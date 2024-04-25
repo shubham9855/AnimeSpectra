@@ -16,16 +16,31 @@
 }
 .homepost-user {
   display: flex;
+  align-items: center;
   /* border: 1px solid white; */
 }
 .user-img {
+  height: 35px;
+  width: 35px;
+  border-radius: 20px;
+  background-color: white;
+}
+.homepost-user-img {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
 }
 .user-name {
-  font-size: 14px;
+  margin-left: 15px;
+  font-size: 17px;
   color: #dba570;
   /* border: 1px solid white; */
 }
+.homepost {
+  display: flex;
+}
 .homepost-content {
+  flex: 1;
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
@@ -34,6 +49,17 @@
   -webkit-box-orient: vertical;
   margin-top: 15px;
   /* border: 1px solid white; */
+}
+.homepost-image {
+  margin-left: 20px;
+
+  height: 75px;
+  width: 80px;
+  background-color: red;
+}
+.homepost-img {
+  height: 100%;
+  width: 100%;
 }
 .homepost-footer {
   display: flex;

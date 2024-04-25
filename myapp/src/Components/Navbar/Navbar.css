@@ -60,7 +60,57 @@
   font-size: 1.5rem;
   display: none;
 }
-
+.sidebared {
+  height: 914px; /* Specify a height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  right: 0;
+  background-color: #000a13; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s;
+  /* border: 2px solid yellow; */
+  /* display: flex; */
+  /* justify-content: space-between; */
+}
+.menu-expand-sidebar {
+  height: 900px;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  flex-direction: column;
+  /* border: 2px solid red; */
+}
+.menu-sidebar-content {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-betweens;
+  row-gap: 50px;
+  /* border: 2px solid white; */
+}
+.menu-button {
+  width: 250px;
+  height: 100px;
+  color: #dba570;
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000a13;
+  box-shadow: 0px 4px 30px 2px rgb(72, 71, 71);
+  border-radius: 20px;
+}
+.menu-button:hover {
+  box-shadow: 0px 4px 30px 2px #dba570;
+}
+.app-info {
+  margin-top: 300px;
+  /* border: 2px solid white; */
+}
 @media (max-width: 767px) {
   .navbar-mail .fav-icon {
     display: none;

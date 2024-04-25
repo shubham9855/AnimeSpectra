@@ -1,11 +1,17 @@
 import "./ParticularCommunity.css";
 import { HomePost } from "../HomePost";
+import CommunityJson from "../../CommunityJson";
+import { useParams } from "react-router-dom";
 export const ParticularCommunity = () => {
+  const { id } = useParams();
+  console.log(id);
+  const community = CommunityJson.find((s) => s.id === parseInt(id));
+  console.log(community);
   return (
     <>
       <div className="particular-main">
         <div className="particular-header">
-          <div className="community-thumbnail">One Piece</div>
+          <div className="community-thumbnail">{community.name}</div>
         </div>
         <div className="particular-body">
           <div className="particular-content">

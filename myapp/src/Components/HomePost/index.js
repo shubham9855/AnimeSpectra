@@ -1,5 +1,6 @@
 import "./HomePost.css";
 import PostJson from "../../Dataset/PostJson";
+import iconImage from "../../images/jjk.jpg";
 
 export const HomePost = () => {
   return (
@@ -8,11 +9,18 @@ export const HomePost = () => {
         return (
           <div className="homepost-main">
             <div className="homepost-user">
-              <div className="user-img"></div>
+              <div className="user-img">
+                <img className="homepost-user-img" src={iconImage}></img>
+              </div>
               <div className="user-name">{item.user}</div>
             </div>
             <hr></hr>
-            <div className="homepost-content">{item.Description}</div>
+            <div className="homepost">
+              <div className="homepost-content">{item.Description}</div>
+              <div className="homepost-image">
+                <img src={iconImage} className="homepost-img"></img>
+              </div>
+            </div>
             <hr></hr>
             <div className="homepost-footer">
               <div className="homepost-upvote">
