@@ -13,6 +13,7 @@ import { ParticularCommunity } from "./Components/ParticularCommunity/Particular
 import { CreatePost } from "./Components/CreatePost/CreatePost";
 import Post from "./Components/Post/Post";
 import Comment from "./Components/Comment/Comment";
+import Comments from "./Components/Comment/Comments";
 
 function App() {
   return (

@@ -1,11 +1,11 @@
-import React from "react";
+// import React from "react";
 
-const Action = ({ handleClick, type, className }) => {
-  return (
-    <div className={className} onClick={handleClick}>
-      {type}
-    </div>
-  );
-};
+// const Action = ({ handleClick, type, className }) => {
+//   return (
+//     <div className={className} onClick={handleClick}>
+//       {type}
+//     </div>
+//   );
+// };
 
-export default Action;
+// export default Action;

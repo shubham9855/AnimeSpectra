@@ -1,11 +1,14 @@
 .postCompnent-post-container {
+  margin: 0 3.4rem;
   margin-top: 100px;
-  width: 780px;
-  height: 834px;
+  width: 50%;
+  height: fit-content;
   padding: 14px 14px 0px 14px;
-  background-color: white;
+  background-color: #000a13;
   display: flex;
   flex-direction: column;
+  box-shadow: 2px 2px 12px 0px #dba570;
+  border-radius: 20px;
 }
 
 .postCompnent-icon-container {
@@ -14,14 +17,20 @@
   /* justify-content: center; */
   align-items: center;
   gap: 8px;
+  margin-left: 35px;
 }
 
-.postCompnent-icon-image {
+.postCompnent-icon-image-box {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.postCompnent-icon-image {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
 .postCompnent-icon-image img {
   height: 32px;
   width: 32px;
@@ -30,7 +39,7 @@
 
 .postCompnent-icon-name span {
   font-size: 14px;
-  color: black;
+  color: white;
   font-weight: 600;
 }
 
@@ -41,7 +50,7 @@
 
 .postCompnent-post-content {
   margin-top: 4px;
-  background-color: white;
+  background-color: #000a13;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,20 +59,25 @@
 .postCompnent-post-title,
 .postCompnent-post-desc {
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
+  /* display: flex; */
+  height: fit-content;
+  /* justify-content: flex-start; */
+  /* margin-left: 80px; */
+  /* background-color: red; */
+  padding: 0 1rem;
+  margin-top: 15px;
 }
 
 .postCompnent-post-title span {
   font-size: 24px;
-  color: black;
+  color: white;
   font-weight: 600;
   margin-bottom: 12px;
 }
 
 .postCompnent-post-desc span {
-  font-size: 14px;
-  color: black;
+  font-size: 16px;
+  color: white;
   margin-bottom: 5px;
 }
 
@@ -77,15 +91,26 @@
   display: flex;
   flex-direction: row;
   gap: 15px;
+  /* justify-content: space-around; */
+  align-items: center;
+
+  margin: 15px 0;
 }
 
 .postComponent-post-votes {
   display: flex;
+  width: 10%;
   flex-direction: row;
+  align-items: center;
   gap: 4px;
-  background-color: rgb(238, 234, 234);
+  /* background-color: rgb(238, 234, 234); */
   padding: 4px;
   border-radius: 10px;
+  margin-left: 35px;
+  font-size: 20px;
+}
+.postComponent-like {
+  /* font-size: 40px; */
 }
 
 * {
@@ -152,7 +177,13 @@
 }
 
 .comment {
-  color: #ffffff;
-  background-color: #569dff;
-  letter-spacing: 0.8px;
+  margin: 0 3.4rem;
+  width: 50%;
+  margin-top: 20px;
+}
+
+@media (max-width: 767px) {
+  .postCompnent-post-container {
+    width: 75%;
+  }
 }

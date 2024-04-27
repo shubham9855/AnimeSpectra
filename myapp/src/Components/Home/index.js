@@ -26,11 +26,6 @@ export const Home = () => {
               />
             </div>
           </div>
-          {/* <hr></hr>
-          <div className="createpost-share">
-            <div className="share-upload">Upload</div>
-            <div className="createpost-share-btn">Share</div>
-          </div> */}
         </div>
 
         <HomePost />

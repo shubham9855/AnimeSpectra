@@ -1,31 +1,39 @@
 .particular-main {
   /* background-color: aqua; */
-  /* height: 400px;
-  width: 100vw; */
+  width: 100%;
 }
 .particular-header {
-  background-color: rgb(1, 61, 41);
-  height: 400px;
-  width: 100vw;
+  /* background-color: rgb(1, 61, 41); */
+  height: 350px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: end; */
+  /* border: 2px solid white; */
+}
+.thumbnail-img-box {
+  width: 100%;
+  height: 350px;
+}
+.thumbnail-img {
   background-image: url("../../images/one-piece.jpg");
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
-  display: flex;
-  /* flex-direction: column; */
-  align-items: end;
-  /* border: 2px solid white; */
+  width: 100%;
+  height: 270px;
 }
 .community-thumbnail {
   background-color: #000a13;
   /* border: 2px solid white; */
-  height: 100px;
-  width: 100vw;
+  height: 70px;
+  /* width: 100vw; */
   display: flex;
   align-items: center;
   font-size: 40px;
   font-weight: 900;
-  padding-left: 50px;
+  /* padding-left: 50px; */
+  justify-content: center;
 }
 .community-info {
   background-color: bisque;
@@ -53,23 +61,33 @@
   font-weight: 800;
   margin-left: 80px;
   /* width: 10px; */
+  /* border: 2px solid white; */
 }
 .particular-body {
   /* background-color: blueviolet;
   height: 500px; */
-  /* border: 2px solid white; */
+  /* border: 2px solid yellow; */
+  margin-top: 30px;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around;
+  align-items: center; */
   padding-top: 10px;
   /* width: 500px; */
 }
 .particular-content {
   /* background-color: blueviolet; */
   /* border: 2px solid white; */
-  width: 750px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  width: 100vw;
+  margin: 0 3.4rem;
+  /* border: 2px solid red; */
 }
 .particular-anime-info {
   /* background-color: rgb(35, 202, 107); */
+  border: 2px solid white;
   /* display: flex; */
   overflow: hidden;
   overflow-wrap: break-word;
@@ -86,4 +104,10 @@
 .about-anime-info {
   font-size: 20px;
   font-weight: 900;
+}
+
+@media (max-width: 767px) {
+  .particular-content {
+    width: 100%;
+  }
 }

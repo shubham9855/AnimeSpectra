@@ -73,7 +73,7 @@ export const Navbar = () => {
       </div>
       <div className="navbar-container">
         <div className="navbar-logo">
-          <Link to="/" className="logo-icon" onClick={handleOpenClick}>
+          <Link to="/" className="logo-icon">
             <img src={logo} className="navbar-logo-img"></img>
             <span>Animespectra</span>
           </Link>

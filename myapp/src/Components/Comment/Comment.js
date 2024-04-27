@@ -1,165 +1,108 @@
-import { useState, useRef, useEffect } from "react";
-import Action from "./Action";
-// import { ReactComponent as DownArrow } from "../assets/down-arrow.svg";
-// import { ReactComponent as UpArrow } from "../assets/up-arrow.svg";
+import CommentForm from "./CommentForm";
 
 const Comment = ({
-  handleInsertNode,
-  handleEditNode,
-  handleDeleteNode,
   comment,
+  replies,
+  setActiveComment,
+  activeComment,
+  updateComment,
+  deleteComment,
+  addComment,
+  parentId = null,
+  currentUserId,
 }) => {
-  console.log(comment);
-  const [input, setInput] = useState("");
-  const [editMode, setEditMode] = useState(false);
-  const [showInput, setShowInput] = useState(false);
-  const [expand, setExpand] = useState(false);
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    inputRef?.current?.focus();
-  }, [editMode]);
-
-  const handleNewComment = () => {
-    setExpand(!expand);
-    setShowInput(true);
-  };
-
-  const onAddComment = () => {
-    if (editMode) {
-      handleEditNode(comment.id, inputRef?.current?.innerText);
-    } else {
-      setExpand(true);
-      handleInsertNode(comment.id, input);
-      setShowInput(false);
-      setInput("");
-    }
-
-    if (editMode) setEditMode(false);
-  };
-
-  const handleDelete = () => {
-    handleDeleteNode(comment.id);
-  };
-
+  const isEditing =
+    activeComment &&
+    activeComment.id === comment.id &&
+    activeComment.type === "editing";
+  const isReplying =
+    activeComment &&
+    activeComment.id === comment.id &&
+    activeComment.type === "replying";
+  const fiveMinutes = 300000;
+  const timePassed = new Date() - new Date(comment.createdAt) > fiveMinutes;
+  const canDelete =
+    currentUserId === comment.userId && replies.length === 0 && !timePassed;
+  const canReply = Boolean(currentUserId);
+  const canEdit = currentUserId === comment.userId && !timePassed;
+  const replyId = parentId ? parentId : comment.id;
+  const createdAt = new Date(comment.createdAt).toLocaleDateString();
   return (
-    <div>
-      <div className={1 === 1 ? "inputContainer" : "commentContainer"}>
-        {1 === 1 ? (
-          <>
-            <input
-              type="text"
-              className="inputContainer__input first_input"
-              autoFocus
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="type..."
-            />
-
-            <Action
-              className="reply comment"
-              type="COMMENT"
-              handleClick={onAddComment}
-            />
-          </>
-        ) : (
-          <>
-            <span
-              contentEditable={editMode}
-              suppressContentEditableWarning={editMode}
-              ref={inputRef}
-              style={{ wordWrap: "break-word" }}
-            >
-              {comment.name}
-            </span>
-
-            <div style={{ display: "flex", marginTop: "5px" }}>
-              {editMode ? (
-                <>
-                  <Action
-                    className="reply"
-                    type="SAVE"
-                    handleClick={onAddComment}
-                  />
-                  <Action
-                    className="reply"
-                    type="CANCEL"
-                    handleClick={() => {
-                      if (inputRef.current)
-                        inputRef.current.innerText = comment.name;
-                      setEditMode(false);
-                    }}
-                  />
-                </>
-              ) : (
-                <>
-                  <Action
-                    className="reply"
-                    type={
-                      <>
-                        {expand
-                          ? {
-                              /* <UpArrow width="10px" height="10px" /> */
-                            }
-                          : {
-                              /* <DownArrow width="10px" height="10px" /> */
-                            }}{" "}
-                        REPLY
-                      </>
-                    }
-                    handleClick={handleNewComment}
-                  />
-                  <Action
-                    className="reply"
-                    type="EDIT"
-                    handleClick={() => {
-                      setEditMode(true);
-                    }}
-                  />
-                  <Action
-                    className="reply"
-                    type="DELETE"
-                    handleClick={handleDelete}
-                  />
-                </>
-              )}
-            </div>
-          </>
-        )}
+    <div key={comment.id} className="comment">
+      <div className="comment-image-container">
+        <img src="/user-icon.png" />
       </div>
-
-      <div style={{ display: expand ? "block" : "none", paddingLeft: 25 }}>
-        {showInput && (
-          <div className="inputContainer">
-            <input
-              type="text"
-              className="inputContainer__input"
-              autoFocus
-              onChange={(e) => setInput(e.target.value)}
-            />
-            <Action className="reply" type="REPLY" handleClick={onAddComment} />
-            <Action
-              className="reply"
-              type="CANCEL"
-              handleClick={() => {
-                setShowInput(false);
-                if (!comment?.items?.length) setExpand(false);
-              }}
-            />
+      <div className="comment-right-part">
+        <div className="comment-content">
+          <div className="comment-author">{comment.username}</div>
+          <div>{createdAt}</div>
+        </div>
+        {!isEditing && <div className="comment-text">{comment.body}</div>}
+        {isEditing && (
+          <CommentForm
+            submitLabel="Update"
+            hasCancelButton
+            initialText={comment.body}
+            handleSubmit={(text) => updateComment(text, comment.id)}
+            handleCancel={() => {
+              setActiveComment(null);
+            }}
+          />
+        )}
+        <div className="comment-actions">
+          {canReply && (
+            <div
+              className="comment-action"
+              onClick={() =>
+                setActiveComment({ id: comment.id, type: "replying" })
+              }
+            >
+              Reply
+            </div>
+          )}
+          {canEdit && (
+            <div
+              className="comment-action"
+              onClick={() =>
+                setActiveComment({ id: comment.id, type: "editing" })
+              }
+            >
+              Edit
+            </div>
+          )}
+          {canDelete && (
+            <div
+              className="comment-action"
+              onClick={() => deleteComment(comment.id)}
+            >
+              Delete
+            </div>
+          )}
+        </div>
+        {isReplying && (
+          <CommentForm
+            submitLabel="Reply"
+            handleSubmit={(text) => addComment(text, replyId)}
+          />
+        )}
+        {replies.length > 0 && (
+          <div className="replies">
+            {replies.map((reply) => (
+              <Comment
+                comment={reply}
+                key={reply.id}
+                setActiveComment={setActiveComment}
+                activeComment={activeComment}
+                updateComment={updateComment}
+                deleteComment={deleteComment}
+                addComment={addComment}
+                parentId={comment.id}
+                replies={[]}
+                currentUserId={currentUserId}
+              />
+            ))}
           </div>
         )}
-
-        {comment?.items?.map((cmnt) => {
-          return (
-            <Comment
-              key={cmnt.id}
-              handleInsertNode={handleInsertNode}
-              handleEditNode={handleEditNode}
-              handleDeleteNode={handleDeleteNode}
-              comment={cmnt}
-            />
-          );
-        })}
       </div>
     </div>
   );

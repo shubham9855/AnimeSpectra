@@ -3,7 +3,7 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { LoginSchema } from "../Loginschema";
-// import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
 // import { signIn } from "../../redux/action/loginaction";
 
@@ -13,11 +13,53 @@ const initialValues = {
 };
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const { errors, values, touched, handleChange, handleSubmit } = useFormik({
     initialValues,
     validationSchema: LoginSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/auth/signin`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: values.email,
+              password: values.password,
+            }),
+          }
+        );
+
+        if (response.ok) {
+          console.log(response);
+          const data = await response.json();
+          console.log(data);
+          const { token } = data;
+
+          // Store the token in localStorage
+          localStorage.setItem("token", token);
+          navigate("/");
+          // Handle successful login
+          console.log("Login successful");
+        } else {
+          throw new Error("Login failed");
+        }
+
+        // You might want to redirect the user or update the UI accordingly
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
     },
   });
   console.log("errors ", errors);
