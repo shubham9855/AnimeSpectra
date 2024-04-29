@@ -4,7 +4,7 @@ import logo from "../../images/blacklogofinal.png";
 import { Sidebar } from "../Sidebar/Sidebar";
 // import { useSelector, useDispatch } from "react-redux";
 // import { logout } from "../../redux/action/loginaction";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   faThumbsUp,
   faThumbsDown,
@@ -14,17 +14,18 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Navbar = () => {
+  // console.log("navbartoken length", token.length);
   //   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const handleLogoutClick = () => {
+    localStorage.removeItem("token");
+  };
   const handleOpenClick = () => {
     if (isOpen == false) {
       document.getElementById("menu-sidebar").style.width = "300px";
-      // document.getElementById("sidebar-main-id").style.display = "block";
-      // document.getElementById("sidebar-main-id").style.width = "73%";
       setIsOpen(true);
     } else {
       document.getElementById("menu-sidebar").style.width = "0px";
-      // document.getElementById("sidebar-main-id").style.display = "none";
       setIsOpen(false);
     }
   };
@@ -51,13 +52,23 @@ export const Navbar = () => {
             >
               <div className="menu-button"> Communities </div>
             </Link>
-            <Link
-              to="/login"
-              style={{ textDecoration: "none" }}
-              onClick={handleOpenClick}
-            >
-              <div className="menu-button"> Login </div>
-            </Link>
+            {false ? (
+              <Link
+                to="/"
+                style={{ textDecoration: "none" }}
+                onClick={handleLogoutClick}
+              >
+                <div className="menu-button"> Logout </div>
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                style={{ textDecoration: "none" }}
+                onClick={handleOpenClick}
+              >
+                <div className="menu-button"> Login </div>
+              </Link>
+            )}
           </div>
           <div className="app-info">
             Made with
@@ -85,9 +96,15 @@ export const Navbar = () => {
           <Link to="/communities" className="fav-icon">
             Communities
           </Link>
-          <Link to="/login" className="fav-icon">
-            Login
-          </Link>
+          {false ? (
+            <Link to="/" className="fav-icon" onClick={handleLogoutClick}>
+              Logout
+            </Link>
+          ) : (
+            <Link to="/login" className="fav-icon">
+              Login
+            </Link>
+          )}
           <div className="menu-icon" onClick={handleOpenClick}>
             <i class="ri-menu-line"></i>
           </div>

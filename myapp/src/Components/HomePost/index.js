@@ -2,12 +2,17 @@ import "./HomePost.css";
 // import PostJson from "../../Dataset/PostJson";
 import iconImage from "../../images/jjk.jpg";
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export const HomePost = () => {
   const [PostJson, setPostJson] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
   // const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:8080";
+  const handleNavigate = (id) => {
+    navigate(`/post/${id}`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +50,10 @@ export const HomePost = () => {
     <>
       {PostJson.map((item) => {
         return (
-          <div className="homepost-main">
+          <div
+            className="homepost-main"
+            onClick={() => handleNavigate(item.postId)}
+          >
             <div className="homepost-user">
               <div className="user-img">
                 <img

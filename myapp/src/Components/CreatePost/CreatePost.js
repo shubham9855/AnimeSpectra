@@ -3,11 +3,13 @@ import "./CreatePost.css";
 import { useState, useEffect } from "react";
 
 export const CreatePost = () => {
+  const token = localStorage.getItem("token");
+  console.log(token);
   const [selectedOption, setSelectedOption] = useState("");
   const [imageUpload, setImageUpload] = useState(false);
   const [title, setTitle] = useState("");
   const [TitleDesc, setTitleDesc] = useState("");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -36,13 +38,14 @@ export const CreatePost = () => {
         {
           method: "POST",
           headers: {
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
             photos: file,
             title: title,
             description: TitleDesc,
-            communityId: selectedOption,
+            communityId: "5d2a58f2-5f1f-44ec-b9d8-756eda97426d",
           }),
         }
       );
@@ -104,7 +107,8 @@ export const CreatePost = () => {
                 <input
                   className="file-input"
                   type="file"
-                  onChange={(e) => setFile(e.target.files[0])}
+                  multiple
+                  onChange={(e) => setFile([...file, ...e.target.files])}
                 ></input>
               </label>
             </div>

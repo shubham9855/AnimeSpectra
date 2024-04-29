@@ -23,6 +23,7 @@
   border-radius: 20px;
   padding: 20px;
   margin-bottom: 40px;
+  resize: none;
 }
 .home-createpost:hover {
   box-shadow: 2px 2px 12px 0px #dba570;
@@ -51,6 +52,7 @@
   padding-left: 10px;
   padding-top: 5px;
   scrollbar-width: thin;
+  resize: none;
 }
 .createpost-share {
   display: flex;

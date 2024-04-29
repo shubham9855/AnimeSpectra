@@ -14,7 +14,7 @@ const initialValues = {
 
 export const Login = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [Loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { errors, values, touched, handleChange, handleSubmit } = useFormik({
     initialValues,
@@ -43,7 +43,8 @@ export const Login = () => {
           console.log(response);
           const data = await response.json();
           console.log(data);
-          const { token } = data;
+          const token = data.jwtToken;
+          console.log(token);
 
           // Store the token in localStorage
           localStorage.setItem("token", token);
@@ -62,6 +63,13 @@ export const Login = () => {
       }
     },
   });
+  // if (Loading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (error) {
+  //   return <div>Error: {error.message}</div>;
+  // }
   console.log("errors ", errors);
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");

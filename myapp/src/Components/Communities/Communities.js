@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 export const Communities = () => {
   const [CommunityJson, setCommunityJson] = useState([]);
-  const [Loading, setLoading] = useState(false);
+  const [Loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +34,13 @@ export const Communities = () => {
   // const Community_list_dec = CommunityJson.slice().sort(
   //   (a, b) => b.Total_posts - a.Total_posts
   // );
+  if (Loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
   console.log(CommunityJson);
   return (
     <>
