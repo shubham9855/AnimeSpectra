@@ -72,11 +72,13 @@ const Post = () => {
     return <div>Error: {error.message}</div>;
   }
   let isLiked = false;
-  postData.likes.map((obj) => {
-    console.log("obj", obj.userId);
-    console.log("decodetoken id", decodedToken.userId);
-    if (obj.userId === decodedToken.userId) isLiked = true;
-  });
+  if (token !== null) {
+    postData.likes.map((obj) => {
+      console.log("obj", obj.userId);
+      console.log("decodetoken id", decodedToken.userId);
+      if (obj.userId === decodedToken.userId) isLiked = true;
+    });
+  }
 
   const handleDislikeClick = async (id) => {
     if (token === null) {
