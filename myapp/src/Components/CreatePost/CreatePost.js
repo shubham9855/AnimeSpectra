@@ -95,7 +95,7 @@ export const CreatePost = () => {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
-            // "Content-Type": "multipart/form-data",
+            // "Content-Type": "multipart/form-data"
           },
           // body: JSON.stringify({
           //   photos: file,

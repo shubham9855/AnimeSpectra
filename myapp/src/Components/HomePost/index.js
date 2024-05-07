@@ -49,7 +49,7 @@ export const HomePost = () => {
     };
 
     fetchData();
-  });
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
