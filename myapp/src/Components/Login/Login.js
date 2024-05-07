@@ -55,7 +55,7 @@ export const Login = () => {
           throw new Error("Login failed");
         }
 
-        // You might want to redirect the user or update the UI accordingly
+        // You might want to redirect the user or update the UI accordingly.
       } catch (error) {
         setError(error.message);
       } finally {

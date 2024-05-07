@@ -2,16 +2,17 @@ import { useState } from "react";
 
 const CommentForm = ({
   handleSubmit,
-  submitLabel,
-  hasCancelButton = false,
-  handleCancel,
+  // submitLabel,
+  // hasCancelButton = false,
+  // handleCancel,
   initialText = "",
 }) => {
   const [text, setText] = useState(initialText);
   const isTextareaDisabled = text.length === 0;
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     handleSubmit(text);
+
     setText("");
   };
   return (

@@ -15,10 +15,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Navbar = () => {
   // console.log("navbartoken length", token.length);
-  //   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  console.log("navbar token", token);
+  // console.log("length", token.length);
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const handleLogoutClick = () => {
     localStorage.removeItem("token");
+    navigate("/");
   };
   const handleOpenClick = () => {
     if (isOpen == false) {
@@ -52,7 +56,7 @@ export const Navbar = () => {
             >
               <div className="menu-button"> Communities </div>
             </Link>
-            {false ? (
+            {token !== null ? (
               <Link
                 to="/"
                 style={{ textDecoration: "none" }}
@@ -96,7 +100,7 @@ export const Navbar = () => {
           <Link to="/communities" className="fav-icon">
             Communities
           </Link>
-          {false ? (
+          {token !== null ? (
             <Link to="/" className="fav-icon" onClick={handleLogoutClick}>
               Logout
             </Link>

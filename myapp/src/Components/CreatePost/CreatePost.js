@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 
 export const CreatePost = () => {
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
   console.log(token);
+
   const [selectedOption, setSelectedOption] = useState("");
   const [imageUpload, setImageUpload] = useState(false);
   const [title, setTitle] = useState("");
@@ -12,9 +14,21 @@ export const CreatePost = () => {
   const [file, setFile] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (token === null) {
+      navigate("/login");
+    }
+  }, []);
+
+  const handleFileChange = (e) => {
+    setFile([...file, ...e.target.files]);
+    // const files = Array.from(event.target.files);
+    console.log("pics file", file);
+    // setFile(files);
+    // setFile(files);
+  };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -25,10 +39,48 @@ export const CreatePost = () => {
   };
 
   const handleClickPost = async () => {
-    console.log("title", title);
-    console.log("desc", TitleDesc);
-    console.log("selectedoption", selectedOption);
-    console.log("fiel", file);
+    console.log("files", file);
+    const data = {
+      title: title,
+      description: TitleDesc,
+      communityId: "5d2a58f2-5f1f-44ec-b9d8-756eda97426d",
+      photos: [],
+    };
+
+    // Convert each file to base64 and add to data.photos array
+    await Promise.all(
+      file.map(async (photo) => {
+        const base64 = await readFileAsBase64(photo);
+        data.photos.push(base64);
+      })
+    );
+
+    // Make your POST request here with data
+    console.log("Data:", data);
+
+    // Prevents the default form submission behavior
+    // const formData = new FormData();
+    // formData.append("title", title);
+    // formData.append("description", TitleDesc);
+    // formData.append("communityId", selectedOption);
+    // const fileObjects = [];
+
+    // Append each file to the array
+    // file.forEach((photo) => {
+    //   fileObjects.push(photo);
+    // });
+
+    // Append the array to formData
+    // formData.append("photos", JSON.stringify(fileObjects));
+    // console.log("FormData:", formData);
+
+    // file.forEach((photo, index) => {
+    //   formData.append(`photos[${index}]`, photo);
+    // });
+    // for (let i = 0; i < file.length; i++) {
+    //   formData.append(`photos`, file[i]);
+    // }
+    // console.log("formdata", formData);
     setError(null);
     setLoading(true);
 
@@ -41,26 +93,45 @@ export const CreatePost = () => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            photos: file,
-            title: title,
-            description: TitleDesc,
-            communityId: "5d2a58f2-5f1f-44ec-b9d8-756eda97426d",
-          }),
+          // body: JSON.stringify({
+          //   photos: file,
+          //   title: title,
+          //   description: TitleDesc,
+          //   communityId: "5d2a58f2-5f1f-44ec-b9d8-756eda97426d",
+          // }),
+          body: JSON.stringify(data),
         }
       );
       if (!response.ok) {
         throw new Error("Login failed");
       }
+      console.log("**correct***");
       console.log(response);
       navigate("/");
       // Handle successful login
       console.log("Login successful");
     } catch (error) {
+      console.log("***error**");
+      console.log(error.message);
       setError(error.message);
     } finally {
       setLoading(false);
     }
+  };
+  const readFileAsBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        resolve(reader.result.split(",")[1]);
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsDataURL(file);
+    });
   };
 
   const selectedImageButtonStyle = imageUpload ? "image-button-selected" : "";
@@ -108,7 +179,7 @@ export const CreatePost = () => {
                   className="file-input"
                   type="file"
                   multiple
-                  onChange={(e) => setFile([...file, ...e.target.files])}
+                  onChange={handleFileChange}
                 ></input>
               </label>
             </div>
