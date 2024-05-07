@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const CommentForm = ({
   handleSubmit,
   // submitLabel,
@@ -7,9 +7,14 @@ const CommentForm = ({
   // handleCancel,
   initialText = "",
 }) => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
   const [text, setText] = useState(initialText);
   const isTextareaDisabled = text.length === 0;
   const onSubmit = async (event) => {
+    if (token === null) {
+      navigate("/login");
+    }
     event.preventDefault();
     handleSubmit(text);
 

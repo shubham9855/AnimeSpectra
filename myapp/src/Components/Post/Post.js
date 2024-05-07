@@ -10,7 +10,7 @@ import {
 import "./Post.css";
 // import Comment from "../Comment/Commt";
 import useNode from "../hooks/useNode";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Comments from "../Comment/Comments";
 import { useJwt } from "react-jwt";
 // import "./styles.css";
@@ -23,7 +23,9 @@ const comments = {
 
 const Post = () => {
   // const [commentsData, setCommentsData] = useState(comments);
+  const navigate = useNavigate();
   const [like, setLike] = useState(0);
+  const [val, setVal] = useState(0);
   const [postData, setPostData] = useState({});
   // const [isLiked, setisLiked] = useState(false);
   const [Loading, setLoading] = useState(true);
@@ -69,8 +71,17 @@ const Post = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+  let isLiked = false;
+  postData.likes.map((obj) => {
+    console.log("obj", obj.userId);
+    console.log("decodetoken id", decodedToken.userId);
+    if (obj.userId === decodedToken.userId) isLiked = true;
+  });
 
   const handleDislikeClick = async (id) => {
+    if (token === null) {
+      navigate("/login");
+    }
     console.log("like handleclik");
     console.log("post id ", id);
     try {
@@ -92,14 +103,18 @@ const Post = () => {
       if (!response.ok) {
         throw new Error("delete like failed");
       }
-      setLike(1);
-      // setisLiked(false);
+      // setLike(1);
+      isLiked = false;
+      window.location.reload();
       console.log("like deleted");
     } catch (error) {
       setError(error.message);
     }
   };
   const handleLikeClick = async (id) => {
+    if (token === null) {
+      navigate("/login");
+    }
     console.log("post id ", id);
     try {
       // setLike(like + 1);
@@ -122,9 +137,10 @@ const Post = () => {
       if (!response.ok) {
         throw new Error("like failed");
       }
-      setLike(1);
-      // setisLiked(true);
-      console.log("like deleted");
+      // setLike(1);
+      isLiked = true;
+      window.location.reload();
+      console.log("liked");
     } catch (error) {
       setError(error.message);
     }
@@ -149,11 +165,11 @@ const Post = () => {
   //   setCommentsData(temp);
   // };
 
-  let isLiked = false;
+  // let isLiked = false;
+  console.log("pst like", postData.likes);
   // item.likes.map((obj) => {
   // console.log("obj", obj.userId);
   // console.log("decodetoken id", decodedToken.userId);
-  if (postData.userId === decodedToken.userId) isLiked = true;
   // });
   return (
     <div className="postCompnent-post-container">

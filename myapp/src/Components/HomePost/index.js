@@ -59,6 +59,9 @@ export const HomePost = () => {
     return <div>Error: {error.message}</div>;
   }
   const handleDislikeClick = async (id) => {
+    if (token === null) {
+      navigate("/login");
+    }
     console.log("like handleclik");
     console.log("post id ", id);
     try {
@@ -88,6 +91,9 @@ export const HomePost = () => {
     }
   };
   const handleLikeClick = async (id) => {
+    if (token === null) {
+      navigate("/login");
+    }
     console.log("post id ", id);
     try {
       // setLike(like + 1);
@@ -124,11 +130,13 @@ export const HomePost = () => {
         const postLike = item.likes.length;
         console.log("item.length", postLike);
         let isLiked = false;
-        item.likes.map((obj) => {
-          console.log("obj", obj.userId);
-          console.log("decodetoken id", decodedToken.userId);
-          if (obj.userId === decodedToken.userId) isLiked = true;
-        });
+        if (token !== null) {
+          item.likes.map((obj) => {
+            console.log("obj", obj.userId);
+            console.log("decodetoken id", decodedToken.userId);
+            if (obj.userId === decodedToken.userId) isLiked = true;
+          });
+        }
         console.log("postcontet ", item);
         return (
           <div className="homepost-main">

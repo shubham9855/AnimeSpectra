@@ -40,38 +40,42 @@ export const CreatePost = () => {
 
   const handleClickPost = async () => {
     console.log("files", file);
-    const data = {
-      title: title,
-      description: TitleDesc,
-      communityId: "5d2a58f2-5f1f-44ec-b9d8-756eda97426d",
-      photos: [],
-    };
+    // const data = {
+    //   title: title,
+    //   description: TitleDesc,
+    //   communityId: "5d2a58f2-5f1f-44ec-b9d8-756eda97426d",
+    //   photos: [],
+    // };
 
     // Convert each file to base64 and add to data.photos array
-    await Promise.all(
-      file.map(async (photo) => {
-        const base64 = await readFileAsBase64(photo);
-        data.photos.push(base64);
-      })
-    );
+    // await Promise.all(
+    //   file.map(async (photo) => {
+    //     const base64 = await readFileAsBase64(photo);
+    //     data.photos.push(base64);
+    //   })
+    // );
 
     // Make your POST request here with data
-    console.log("Data:", data);
+    // console.log("Data:", data);
 
     // Prevents the default form submission behavior
-    // const formData = new FormData();
-    // formData.append("title", title);
-    // formData.append("description", TitleDesc);
-    // formData.append("communityId", selectedOption);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", TitleDesc);
+    formData.append("communityId", "5d2a58f2-5f1f-44ec-b9d8-756eda97426d");
     // const fileObjects = [];
 
     // Append each file to the array
-    // file.forEach((photo) => {
-    //   fileObjects.push(photo);
-    // });
+    file.forEach((photo) => {
+      console.log("each photo", photo);
+      formData.append("photos", photo);
+    });
 
     // Append the array to formData
-    // formData.append("photos", JSON.stringify(fileObjects));
+    // formData.append("photos", file);
+    for (var key of formData.entries()) {
+      console.log(key[0] + ", " + key[1]);
+    }
     // console.log("FormData:", formData);
 
     // file.forEach((photo, index) => {
@@ -91,7 +95,7 @@ export const CreatePost = () => {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            // "Content-Type": "multipart/form-data",
           },
           // body: JSON.stringify({
           //   photos: file,
@@ -99,7 +103,7 @@ export const CreatePost = () => {
           //   description: TitleDesc,
           //   communityId: "5d2a58f2-5f1f-44ec-b9d8-756eda97426d",
           // }),
-          body: JSON.stringify(data),
+          body: formData,
         }
       );
       if (!response.ok) {
