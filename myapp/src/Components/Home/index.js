@@ -7,8 +7,6 @@ export const Home = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const { decodedToken, isExpired } = useJwt(token);
-  console.log("decoded token ", decodedToken);
-  console.log("expired token ", isExpired);
   const handleFocus = () => {
     navigate("/createpost");
   };
@@ -24,11 +22,6 @@ export const Home = () => {
               ></img>
             </div>
             <div className="createpost-input">
-              {/* <input
-                type="textArea"
-                className="post-input-field"
-                placeholder="What's on your Mind !!!"
-              /> */}
               <textarea
                 className="post-input-field"
                 placeholder="What's on your Mind !!!"

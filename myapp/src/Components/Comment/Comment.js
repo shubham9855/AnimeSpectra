@@ -11,50 +11,23 @@ const Comment = ({
   parentId = null,
   currentUserId,
 }) => {
-  // console.log("comment", comment);
-  // console.log("replies", replies);
-  console.log("active comments", activeComment);
-  console.log("comment", comment.commentId);
-  // const isEditing =
-  //   activeComment &&
-  //   activeComment.id === comment.id &&
-  //   activeComment.type === "editing";
   const isReplying =
     activeComment &&
     activeComment.id === comment.commentId &&
     activeComment.type === "replying";
-  console.log("isreplying", isReplying);
-  // const fiveMinutes = 300000;
-  // const timePassed = new Date() - new Date(comment.createdAt) > fiveMinutes;
-  // const canDelete =
-  // currentUserId === comment.userId && replies.length === 0 && !timePassed;
   const canReply = Boolean(currentUserId);
-  // const canEdit = currentUserId === comment.userId && !timePassed;
   const replyId = parentId ? parentId : comment.commentId;
-  console.log("replyID", replyId);
-  // const createdAt = new Date(comment.createdAt).toLocaleDateString();
   return (
     <div key={comment.id} className="comment">
       <div className="comment-image-container">
-        <img src="/user-icon.png" />
+        <img src={comment.user.profileUrl} />
       </div>
       <div className="comment-right-part">
         <div className="comment-content">
-          <div className="comment-author">{comment.username}</div>
-          <div style={{ fontSize: "12px" }}> #{comment.timestamp}</div>
+          <div className="comment-author">{comment.user.userName}</div>
+          {/* <div style={{ fontSize: "12px" }}>#{comment.timestamp}</div> */}
         </div>
         {<div className="comment-text">{comment.description}</div>}
-        {/* {isEditing && (
-          <CommentForm
-            submitLabel="Update"
-            hasCancelButton
-            initialText={comment.body}
-            handleSubmit={(text) => updateComment(text, comment.id)}
-            handleCancel={() => {
-              setActiveComment(null);
-            }}
-          />
-        )} */}
         <div className="comment-actions">
           {canReply && (
             <div
@@ -66,24 +39,6 @@ const Comment = ({
               Reply
             </div>
           )}
-          {/* {canEdit && (
-            <div
-              className="comment-action"
-              onClick={() =>
-                setActiveComment({ id: comment.id, type: "editing" })
-              }
-            >
-              Edit
-            </div>
-          )} */}
-          {/* {canDelete && (
-            <div
-              className="comment-action"
-              onClick={() => deleteComment(comment.id)}
-            >
-              Delete
-            </div>
-          )} */}
         </div>
         {isReplying && (
           <CommentForm
@@ -99,8 +54,6 @@ const Comment = ({
                 key={reply.id}
                 setActiveComment={setActiveComment}
                 activeComment={activeComment}
-                // updateComment={updateComment}
-                // deleteComment={deleteComment}
                 addComment={addComment}
                 parentId={comment.commentId}
                 replies={[]}

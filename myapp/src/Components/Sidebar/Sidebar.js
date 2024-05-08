@@ -16,7 +16,6 @@ export const Sidebar = () => {
     (a, b) => b.Total_posts - a.Total_posts
   );
   const Top_comm = Community_list_dec.slice(0, 3);
-  console.log(Community_list_dec);
   return (
     <>
       <div className="sidebar-main">

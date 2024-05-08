@@ -14,10 +14,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Navbar = () => {
-  // console.log("navbartoken length", token.length);
   const token = localStorage.getItem("token");
-  console.log("navbar token", token);
-  // console.log("length", token.length);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const handleLogoutClick = () => {
@@ -33,10 +30,7 @@ export const Navbar = () => {
       setIsOpen(false);
     }
   };
-  //   const dispatch = useDispatch();
-  //   const islogin = useSelector((state) => state.loginreducer.islogin);
 
-  //   if (islogin) {
   return (
     <>
       <div id="menu-sidebar" className="sidebared">
@@ -116,62 +110,4 @@ export const Navbar = () => {
       </div>
     </>
   );
-  //   } else {
-  //     return (
-  //       <>
-  //         <div className="navbar-container">
-  //           <div className="navbar-logo">
-  //             <Link to="/" className="logo-icon">
-  //               kicks_rush
-  //             </Link>
-  //           </div>
-
-  //           <div className="navbar-middle">
-  //             <Link
-  //               to="/sneaker"
-  //               className="sneaker-icon"
-  //               onClick={() => dispatch(clearSneakers())}
-  //             >
-  //               Sneakers
-  //             </Link>
-  //             <Link to="/favorite" className="fav-icon">
-  //               Favorites
-  //             </Link>
-  //             <Link to="/about" className="fav-icon">
-  //               About us
-  //             </Link>
-  //             <div className="search-icon">
-  //               <input
-  //                 type="text"
-  //                 placeholder="Search"
-  //                 className="search-input"
-  //                 onChange={(e) => {
-  //                   console.log("search val", e.target.value);
-  //                   setFind(e.target.value);
-  //                 }}
-  //               ></input>
-  //               <img
-  //                 src={search}
-  //                 className="search-img"
-  //                 onClick={() => {
-  //                   console.log("seach action dispatched", find);
-  //                   dispatch(searchSneakers(find));
-  //                   navigate("/sneaker");
-  //                 }}
-  //               ></img>
-  //             </div>
-  //           </div>
-  //           <div className="navbar-mail">
-  //             <Link to="/login" className="login-icon">
-  //               login
-  //             </Link>
-  //             <Link to="/cart" className="image-icon">
-  //               <img src={cart} className="cart-image"></img>
-  //             </Link>
-  //           </div>
-  //         </div>
-  //       </>
-  //     );
-  //   }
-  // };
 };

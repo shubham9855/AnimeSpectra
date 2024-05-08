@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 export const CreatePost = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  console.log(token);
 
   const [selectedOption, setSelectedOption] = useState("");
   const [imageUpload, setImageUpload] = useState(false);
@@ -24,10 +23,6 @@ export const CreatePost = () => {
 
   const handleFileChange = (e) => {
     setFile([...file, ...e.target.files]);
-    // const files = Array.from(event.target.files);
-    console.log("pics file", file);
-    // setFile(files);
-    // setFile(files);
   };
 
   const handleOptionChange = (event) => {
@@ -39,26 +34,6 @@ export const CreatePost = () => {
   };
 
   const handleClickPost = async () => {
-    console.log("files", file);
-    // const data = {
-    //   title: title,
-    //   description: TitleDesc,
-    //   communityId: "5d2a58f2-5f1f-44ec-b9d8-756eda97426d",
-    //   photos: [],
-    // };
-
-    // Convert each file to base64 and add to data.photos array
-    // await Promise.all(
-    //   file.map(async (photo) => {
-    //     const base64 = await readFileAsBase64(photo);
-    //     data.photos.push(base64);
-    //   })
-    // );
-
-    // Make your POST request here with data
-    // console.log("Data:", data);
-
-    // Prevents the default form submission behavior
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", TitleDesc);
@@ -67,24 +42,8 @@ export const CreatePost = () => {
 
     // Append each file to the array
     file.forEach((photo) => {
-      console.log("each photo", photo);
       formData.append("photos", photo);
     });
-
-    // Append the array to formData
-    // formData.append("photos", file);
-    for (var key of formData.entries()) {
-      console.log(key[0] + ", " + key[1]);
-    }
-    // console.log("FormData:", formData);
-
-    // file.forEach((photo, index) => {
-    //   formData.append(`photos[${index}]`, photo);
-    // });
-    // for (let i = 0; i < file.length; i++) {
-    //   formData.append(`photos`, file[i]);
-    // }
-    // console.log("formdata", formData);
     setError(null);
     setLoading(true);
 
@@ -97,26 +56,16 @@ export const CreatePost = () => {
             Authorization: `Bearer ${token}`,
             // "Content-Type": "multipart/form-data"
           },
-          // body: JSON.stringify({
-          //   photos: file,
-          //   title: title,
-          //   description: TitleDesc,
-          //   communityId: "5d2a58f2-5f1f-44ec-b9d8-756eda97426d",
-          // }),
           body: formData,
         }
       );
       if (!response.ok) {
         throw new Error("Login failed");
       }
-      console.log("**correct***");
-      console.log(response);
+
       navigate("/");
       // Handle successful login
-      console.log("Login successful");
     } catch (error) {
-      console.log("***error**");
-      console.log(error.message);
       setError(error.message);
     } finally {
       setLoading(false);

@@ -11,9 +11,6 @@ import {
 
 const Comments = ({ postID, commentData, currentUserId }) => {
   const token = localStorage.getItem("token");
-  console.log("postid in comments", postID);
-  console.log("commentdata in comments", commentData);
-  console.log("currentUserid in comments", currentUserId);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   // const [error, setError] = useState(null);
@@ -26,20 +23,13 @@ const Comments = ({ postID, commentData, currentUserId }) => {
     (backendComment) => backendComment.parentId === null
   );
 
-  console.log("root comment", rootComments);
-
   //extracted all the replies for a particular comment wrt to comment id
   const getReplies = (commentId) =>
     backendComments.filter(
       (backendComment) => backendComment.parentId === commentId
     );
-  // .sort(
-  //   (a, b) =>
-  //     new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-  // );
-  // console.log(getReplies);
+
   const addComment = async (text, parentId) => {
-    console.log("comment added ", text, parentId);
     let opComment = {};
     if (parentId === null) {
       opComment = {
@@ -56,16 +46,6 @@ const Comments = ({ postID, commentData, currentUserId }) => {
     }
 
     try {
-      // createCommentApi(postID, text, parentId).then((comment) => {
-      //   console.log("comment to be posted", comment);
-      //   // console.log("comment to before update ", [comment, ...backendComments]);
-      //   // setCmt(comment);
-      //   // console.log("cmt", cmt);
-      //   setActiveComment(null);
-      // });
-      console.log("comment to be published", opComment);
-      console.log("sending comment req.");
-      console.log("comment to backend comments", backendComments);
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/comments`,
         {
@@ -80,37 +60,11 @@ const Comments = ({ postID, commentData, currentUserId }) => {
       if (!response.ok) {
         throw new Error("like failed");
       }
-      // setCmt(1);
       window.location.reload();
-      console.log("comment posted");
     } catch (error) {
-      console.log("***********", error);
       setError(error.message);
     }
   };
-
-  // const updateComment = (text, commentId) => {
-  //   updateCommentApi(text).then(() => {
-  //     const updatedBackendComments = backendComments.map((backendComment) => {
-  //       if (backendComment.id === commentId) {
-  //         return { ...backendComment, body: text };
-  //       }
-  //       return backendComment;
-  //     });
-  //     setBackendComments(updatedBackendComments);
-  //     setActiveComment(null);
-  //   });
-  // };
-  // const deleteComment = (commentId) => {
-  //   if (window.confirm("Are you sure you want to remove comment?")) {
-  //     deleteCommentApi().then(() => {
-  //       const updatedBackendComments = backendComments.filter(
-  //         (backendComment) => backendComment.id !== commentId
-  //       );
-  //       setBackendComments(updatedBackendComments);
-  //     });
-  //   }
-  // };
 
   useEffect(() => {
     setBackendComments(commentData);
@@ -128,8 +82,6 @@ const Comments = ({ postID, commentData, currentUserId }) => {
             activeComment={activeComment}
             setActiveComment={setActiveComment}
             addComment={addComment}
-            // deleteComment={deleteComment}
-            // updateComment={updateComment}
             currentUserId={currentUserId}
           />
         ))}

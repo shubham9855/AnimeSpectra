@@ -14,7 +14,6 @@ export const ParticularCommunity = () => {
 
     const fetchData = async () => {
       try {
-        // console.log(`${process.env.REACT_APP_BACKEND_URL}/api/posts`);
         const res = await fetch(
           `${process.env.REACT_APP_BACKEND_URL}/api/communities`
         );
@@ -22,9 +21,6 @@ export const ParticularCommunity = () => {
           throw new Error("Network response was not ok");
         }
         const data = await res.json();
-        console.log(data);
-        console.log(data.communities.find((s) => s.communityId === id));
-        // const partCommunity  = data.communities.
         setCommunityJson(data.communities.find((s) => s.communityId === id));
         setLoading(false);
       } catch (error) {
@@ -51,14 +47,6 @@ export const ParticularCommunity = () => {
           <div className="particular-content">
             <HomePost />
           </div>
-          {/* <div className="particular-anime-info">
-            <span className="about-anime-info">About</span>
-            <hr></hr>
-            <div className="anime-info-description">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-              fuga quod omnis ad, quis quam alias nulla natus eius molestias!
-            </div>
-          </div> */}
         </div>
       </div>
     </>

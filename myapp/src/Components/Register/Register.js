@@ -23,7 +23,6 @@ export const Register = () => {
     initialValues,
     validationSchema: RegisterSchema,
     onSubmit: async (values) => {
-      // console.log(values);
       setLoading(true);
       setError(null);
 
@@ -50,7 +49,6 @@ export const Register = () => {
         }
         navigate("/login");
         // Handle successful login
-        console.log("Login successful");
 
         // You might want to redirect the user or update the UI accordingly
       } catch (error) {
@@ -60,28 +58,6 @@ export const Register = () => {
       }
     },
   });
-  //   const dispatch = useDispatch();
-  //   const selector = useSelector((state) => state.loginreducer);
-  // const [username, setUsername] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setconfirmPassword] = useState("");
-  //   const navigate = useNavigate();
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Username:", username);
-  //   console.log("email:", email);
-  //   console.log("Password:", password);
-  //   console.log("cPassword:", confirmPassword);
-  //   console.log("register clicked");
-
-  //   const formData = { username, email, password };
-  //   console.log(formData);
-
-  // dispatch(signUp(formData));
-  // navigate("/");
-  // };
 
   return (
     <div className="register-container">

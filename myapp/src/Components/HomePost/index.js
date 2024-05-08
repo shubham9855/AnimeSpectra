@@ -22,7 +22,6 @@ export const HomePost = () => {
   const { decodedToken, isExpired } = useJwt(token);
 
   const navigate = useNavigate();
-  // const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:8080";
   const handleNavigate = (id) => {
     navigate(`/post/${id}`);
   };
@@ -30,7 +29,6 @@ export const HomePost = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // console.log(`${process.env.REACT_APP_BACKEND_URL}/api/posts`);
         const response = await fetch(
           `${process.env.REACT_APP_BACKEND_URL}/api/posts`
         );
@@ -38,9 +36,7 @@ export const HomePost = () => {
           throw new Error("Network response was not ok");
         }
         const post = await response.json();
-        console.log(post);
         setPostJson(post?.posts);
-        console.log(PostJson);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -62,11 +58,7 @@ export const HomePost = () => {
     if (token === null) {
       navigate("/login");
     }
-    console.log("like handleclik");
-    console.log("post id ", id);
     try {
-      // setLike(like - 1);
-      console.log("in if");
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/votes`,
         {
@@ -84,8 +76,6 @@ export const HomePost = () => {
         throw new Error("delete like failed");
       }
       setLike(1);
-      // setisLiked(false);
-      console.log("like deleted");
     } catch (error) {
       setError(error.message);
     }
@@ -94,11 +84,7 @@ export const HomePost = () => {
     if (token === null) {
       navigate("/login");
     }
-    console.log("post id ", id);
     try {
-      // setLike(like + 1);
-      console.log("in else");
-      // console.log("new like", like);
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/votes`,
         {
@@ -117,8 +103,6 @@ export const HomePost = () => {
         throw new Error("like failed");
       }
       setLike(1);
-      // setisLiked(true);
-      console.log("like deleted");
     } catch (error) {
       setError(error.message);
     }
@@ -128,16 +112,12 @@ export const HomePost = () => {
     <>
       {PostJson.map((item) => {
         const postLike = item.likes.length;
-        console.log("item.length", postLike);
         let isLiked = false;
         if (token !== null) {
           item.likes.map((obj) => {
-            console.log("obj", obj.userId);
-            console.log("decodetoken id", decodedToken.userId);
-            if (obj.userId === decodedToken.userId) isLiked = true;
+            if (obj?.userId === decodedToken?.userId) isLiked = true;
           });
         }
-        console.log("postcontet ", item);
         return (
           <div className="homepost-main">
             <div className="homepost-user">
@@ -174,7 +154,6 @@ export const HomePost = () => {
                   />
                 )}
                 <div className="upvote-count">{item.likes.length}</div>
-                {/* <div className="down">-</div> */}
               </div>
               <div
                 className="homepost-comment"

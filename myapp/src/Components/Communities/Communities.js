@@ -13,7 +13,6 @@ export const Communities = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // console.log(`${process.env.REACT_APP_BACKEND_URL}/api/posts`);
         const res = await fetch(
           `${process.env.REACT_APP_BACKEND_URL}/api/communities`
         );
@@ -21,7 +20,6 @@ export const Communities = () => {
           throw new Error("Network response was not ok");
         }
         const data = await res.json();
-        console.log(data);
         setCommunityJson(data.communities);
         setLoading(false);
       } catch (error) {
@@ -31,9 +29,7 @@ export const Communities = () => {
     };
     fetchData();
   }, []);
-  // const Community_list_dec = CommunityJson.slice().sort(
-  //   (a, b) => b.Total_posts - a.Total_posts
-  // );
+
   if (Loading) {
     return <div>Loading...</div>;
   }
@@ -41,7 +37,6 @@ export const Communities = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-  console.log(CommunityJson);
   return (
     <>
       <div className="main-community">

@@ -5,8 +5,8 @@ import {
   faThumbsUp,
   faThumbsDown,
   faComment,
-  faHeart,
 } from "@fortawesome/free-regular-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import "./Post.css";
 // import Comment from "../Comment/Commt";
 import useNode from "../hooks/useNode";
@@ -32,13 +32,10 @@ const Post = () => {
   const [error, setError] = useState(null);
 
   const { id } = useParams();
-  console.log("post id ", id);
-  console.log("initial comments", comments);
   const token = localStorage.getItem("token");
   const { decodedToken, isExpired } = useJwt(token);
 
   useEffect(() => {
-    console.log("fetch request made");
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -48,11 +45,7 @@ const Post = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("particular post ", data.post);
         setPostData(data.post);
-        // console.log(postData.images);
-        console.log(data.post.postId);
-        // console.log("fetched like ", fetchedLike);
         setLike(data.post.likes.length);
         setLoading(false);
       } catch (error) {
@@ -74,9 +67,7 @@ const Post = () => {
   let isLiked = false;
   if (token !== null) {
     postData.likes.map((obj) => {
-      console.log("obj", obj.userId);
-      console.log("decodetoken id", decodedToken.userId);
-      if (obj.userId === decodedToken.userId) isLiked = true;
+      if (obj?.userId === decodedToken?.userId) isLiked = true;
     });
   }
 
@@ -84,11 +75,8 @@ const Post = () => {
     if (token === null) {
       navigate("/login");
     }
-    console.log("like handleclik");
-    console.log("post id ", id);
+
     try {
-      // setLike(like - 1);
-      console.log("in if");
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/votes`,
         {
@@ -108,7 +96,6 @@ const Post = () => {
       // setLike(1);
       isLiked = false;
       window.location.reload();
-      console.log("like deleted");
     } catch (error) {
       setError(error.message);
     }
@@ -117,11 +104,8 @@ const Post = () => {
     if (token === null) {
       navigate("/login");
     }
-    console.log("post id ", id);
+
     try {
-      // setLike(like + 1);
-      console.log("in else");
-      // console.log("new like", like);
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/votes`,
         {
@@ -142,49 +126,21 @@ const Post = () => {
       // setLike(1);
       isLiked = true;
       window.location.reload();
-      console.log("liked");
     } catch (error) {
       setError(error.message);
     }
   };
 
-  // const { insertNode, editNode, deleteNode } = useNode();
-
-  // const handleInsertNode = (folderId, item) => {
-  //   const finalStructure = insertNode(commentsData, folderId, item);
-  //   console.log(finalStructure);
-  //   setCommentsData(finalStructure);
-  // };
-
-  // const handleEditNode = (folderId, value) => {
-  //   const finalStructure = editNode(commentsData, folderId, value);
-  //   setCommentsData(finalStructure);
-  // };
-
-  // const handleDeleteNode = (folderId) => {
-  //   const finalStructure = deleteNode(commentsData, folderId);
-  //   const temp = { ...finalStructure };
-  //   setCommentsData(temp);
-  // };
-
-  // let isLiked = false;
-  console.log("pst like", postData.likes);
-  // item.likes.map((obj) => {
-  // console.log("obj", obj.userId);
-  // console.log("decodetoken id", decodedToken.userId);
-  // });
   return (
     <div className="postCompnent-post-container">
       <div className="postCompnent-icon-container">
         <div className="postCompnent-icon-image">
-          <img src="" />
+          <img src={postData.user.profileUrl} />
         </div>
         <div className="postCompnent-icon-name">
           <span>{postData.user.userName}</span>
         </div>
-        <div className="postCompnent-icon-date">
-          {/* <span>postData.timestamp</span> */}
-        </div>
+        <div className="postCompnent-icon-date"></div>
       </div>
       <div className="postCompnent-post-content">
         <div className="postCompnent-post-title">
@@ -212,24 +168,19 @@ const Post = () => {
           <div className="postComponent-like">
             {isLiked ? (
               <FontAwesomeIcon
-                icon={faThumbsDown}
+                icon={faHeart}
+                style={{ color: "dba570" }}
                 onClick={() => handleDislikeClick(id)}
               />
             ) : (
               <FontAwesomeIcon
-                icon={faThumbsUp}
+                icon={faHeart}
                 onClick={() => handleLikeClick(id)}
               />
             )}
           </div>
           <span>{like}</span>
-          {/* <div className="postCompnent-dislike">
-              <FontAwesomeIcon icon={faThumbsDown} />
-            </div> */}
         </div>
-        {/* <div className="postCompnent-comment">
-            <FontAwesomeIcon icon={faComment} />
-          </div> */}
       </div>
       <div className="comment">
         <Comments
@@ -237,12 +188,6 @@ const Post = () => {
           commentData={postData.comments}
           currentUserId={postData.userId}
         ></Comments>
-        {/* <Comment
-          handleInsertNode={handleInsertNode}
-          handleEditNode={handleEditNode}
-          handleDeleteNode={handleDeleteNode}
-          comment={commentsData}
-        /> */}
       </div>
     </div>
   );
