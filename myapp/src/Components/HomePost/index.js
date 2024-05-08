@@ -45,7 +45,7 @@ export const HomePost = () => {
     };
 
     fetchData();
-  }, []);
+  }, [like]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -76,6 +76,7 @@ export const HomePost = () => {
         throw new Error("delete like failed");
       }
       setLike(1);
+      // window.location.reload();
     } catch (error) {
       setError(error.message);
     }
@@ -102,7 +103,8 @@ export const HomePost = () => {
       if (!response.ok) {
         throw new Error("like failed");
       }
-      setLike(1);
+      setLike(15);
+      // window.location.reload();
     } catch (error) {
       setError(error.message);
     }
@@ -143,15 +145,36 @@ export const HomePost = () => {
             <div className="homepost-footer">
               <div className="homepost-upvote">
                 {isLiked ? (
-                  <FontAwesomeIcon
-                    icon={faThumbsDown}
+                  <svg
+                    width="20px"
+                    height="20px"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                     onClick={() => handleDislikeClick(item.postId)}
-                  />
+                  >
+                    <g transform="translate(0 -1028.4)">
+                      <path
+                        d="m7 1031.4c-1.5355 0-3.0784 0.5-4.25 1.7-2.3431 2.4-2.2788 6.1 0 8.5l9.25 9.8 9.25-9.8c2.279-2.4 2.343-6.1 0-8.5-2.343-2.3-6.157-2.3-8.5 0l-0.75 0.8-0.75-0.8c-1.172-1.2-2.7145-1.7-4.25-1.7z"
+                        fill="#dba570"
+                      />
+                    </g>
+                  </svg>
                 ) : (
-                  <FontAwesomeIcon
-                    icon={faThumbsUp}
+                  <svg
+                    width="18px"
+                    height="18px"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                     onClick={() => handleLikeClick(item.postId)}
-                  />
+                  >
+                    <g transform="translate(0 -1028.4)">
+                      <path
+                        d="m7 1031.4c-1.5355 0-3.0784 0.5-4.25 1.7-2.3431 2.4-2.2788 6.1 0 8.5l9.25 9.8 9.25-9.8c2.279-2.4 2.343-6.1 0-8.5-2.343-2.3-6.157-2.3-8.5 0l-0.75 0.8-0.75-0.8c-1.172-1.2-2.7145-1.7-4.25-1.7z"
+                        stroke="#ffffff" // White border
+                        strokeWidth="2" // Adjust the thickness of the border as needed
+                      />
+                    </g>
+                  </svg>
                 )}
                 <div className="upvote-count">{item.likes.length}</div>
               </div>

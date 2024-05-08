@@ -69,11 +69,13 @@
 }
 .homepost-upvote {
   display: flex;
+  align-items: center;
+  /* justify-content: center; */
   color: #dba570;
   /* border: 1px solid white; */
 }
 .upvote-count {
-  margin-left: 10px;
+  margin-left: 5px;
   margin-right: 10px;
   color: #dba570;
 }

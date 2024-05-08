@@ -52,9 +52,7 @@
 .form-dropDown {
   display: flex;
   align-items: self-start;
-  margin-top: 16px;
-  margin-bottom: 8px;
-  margin-left: 15px;
+  margin: 12px 15px;
 }
 
 .form-dropDown select::after {
@@ -229,9 +227,13 @@
 
 @media (max-width: 700px) {
   .form-dropDown select {
-    width: 210px;
+    width: 250px;
+    font-size: 14px;
   }
   .form-container {
     width: 80%;
+  }
+  .drop-container {
+    align-items: normal;
   }
 }

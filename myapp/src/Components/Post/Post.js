@@ -55,7 +55,7 @@ const Post = () => {
     };
 
     fetchData();
-  }, []);
+  }, [val]);
 
   if (Loading) {
     return <div>Loading...</div>;
@@ -93,9 +93,9 @@ const Post = () => {
       if (!response.ok) {
         throw new Error("delete like failed");
       }
-      // setLike(1);
+      setVal(1);
       isLiked = false;
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       setError(error.message);
     }
@@ -123,9 +123,9 @@ const Post = () => {
       if (!response.ok) {
         throw new Error("like failed");
       }
-      // setLike(1);
+      setVal(3);
       isLiked = true;
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       setError(error.message);
     }
@@ -167,16 +167,36 @@ const Post = () => {
         <div className="postComponent-post-votes">
           <div className="postComponent-like">
             {isLiked ? (
-              <FontAwesomeIcon
-                icon={faHeart}
-                style={{ color: "dba570" }}
+              <svg
+                width="25px"
+                height="25px"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
                 onClick={() => handleDislikeClick(id)}
-              />
+              >
+                <g transform="translate(0 -1028.4)">
+                  <path
+                    d="m7 1031.4c-1.5355 0-3.0784 0.5-4.25 1.7-2.3431 2.4-2.2788 6.1 0 8.5l9.25 9.8 9.25-9.8c2.279-2.4 2.343-6.1 0-8.5-2.343-2.3-6.157-2.3-8.5 0l-0.75 0.8-0.75-0.8c-1.172-1.2-2.7145-1.7-4.25-1.7z"
+                    fill="#dba570"
+                  />
+                </g>
+              </svg>
             ) : (
-              <FontAwesomeIcon
-                icon={faHeart}
+              <svg
+                width="23px"
+                height="23px"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
                 onClick={() => handleLikeClick(id)}
-              />
+              >
+                <g transform="translate(0 -1028.4)">
+                  <path
+                    d="m7 1031.4c-1.5355 0-3.0784 0.5-4.25 1.7-2.3431 2.4-2.2788 6.1 0 8.5l9.25 9.8 9.25-9.8c2.279-2.4 2.343-6.1 0-8.5-2.343-2.3-6.157-2.3-8.5 0l-0.75 0.8-0.75-0.8c-1.172-1.2-2.7145-1.7-4.25-1.7z"
+                    stroke="#ffffff" // White border
+                    strokeWidth="2" // Adjust the thickness of the border as needed
+                  />
+                </g>
+              </svg>
             )}
           </div>
           <span>{like}</span>

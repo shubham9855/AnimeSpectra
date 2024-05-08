@@ -176,6 +176,9 @@
   font-weight: 600;
   cursor: pointer;
 }
+.like-button {
+  background-color: #dba570 !important;
+}
 
 .comment {
   /* margin: 0 3.4rem; */
