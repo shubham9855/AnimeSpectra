@@ -21,6 +21,7 @@ export const ParticularCommunity = () => {
           throw new Error("Network response was not ok");
         }
         const data = await res.json();
+        console.log(data.communities.find((s) => s.communityId === id));
         setCommunityJson(data.communities.find((s) => s.communityId === id));
         setLoading(false);
       } catch (error) {

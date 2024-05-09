@@ -7,36 +7,40 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export const Communities = () => {
-  const [CommunityJson, setCommunityJson] = useState([]);
+  const [Communitydata, setCommunityData] = useState([]);
   const [Loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/api/communities`
-        );
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await res.json();
-        setCommunityJson(data.communities);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-    fetchData();
+    // const fetchData = async () => {
+    //   try {
+    //     const res = await fetch(
+    //       `${process.env.REACT_APP_BACKEND_URL}/api/communities`
+    //     );
+    //     if (!res.ok) {
+    //       throw new Error("Network response was not ok");
+    //     }
+    //     const data = await res.json();
+    //     console.log(data.communities);
+    //     setCommunityJson(data.communities);
+    //     setLoading(false);
+    //   } catch (error) {
+    //     setError(error);
+    //     setLoading(false);
+    //   }
+    // };
+    // fetchData();
+    // setLoading(false);
+    console.log(CommunityJson);
+    setCommunityData(CommunityJson);
   }, []);
 
-  if (Loading) {
-    return <div>Loading...</div>;
-  }
+  // if (Loading) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error.message}</div>;
+  // }
   return (
     <>
       <div className="main-community">

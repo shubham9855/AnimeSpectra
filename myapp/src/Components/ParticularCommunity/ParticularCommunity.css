@@ -30,7 +30,7 @@
   /* width: 100vw; */
   display: flex;
   align-items: center;
-  font-size: 40px;
+  font-size: 25px;
   font-weight: 900;
   /* padding-left: 50px; */
   justify-content: center;
@@ -82,7 +82,7 @@
   /* justify-content: center; */
   align-items: center;
   width: 100vw;
-  margin: 0 3.4rem;
+  /* margin: 0 3.4rem; */
   /* border: 2px solid red; */
 }
 .particular-anime-info {
