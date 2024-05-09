@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import iconImage from "../../images/jjk.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faThumbsUp,
-  faThumbsDown,
-  faComment,
-} from "@fortawesome/free-regular-svg-icons";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import "./Post.css";
 // import Comment from "../Comment/Commt";
 import useNode from "../hooks/useNode";
