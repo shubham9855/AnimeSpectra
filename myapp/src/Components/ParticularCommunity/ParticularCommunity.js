@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 export const ParticularCommunity = () => {
   const [CommunityJson, setCommunityJson] = useState([]);
-  const [Loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { id } = useParams();
   useEffect(() => {
@@ -21,7 +21,6 @@ export const ParticularCommunity = () => {
           throw new Error("Network response was not ok");
         }
         const data = await res.json();
-        console.log(data.communities.find((s) => s.communityId === id));
         setCommunityJson(data.communities.find((s) => s.communityId === id));
         setLoading(false);
       } catch (error) {
@@ -31,6 +30,14 @@ export const ParticularCommunity = () => {
     };
     fetchData();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Failed to fetch data, Go to home page </div>;
+  }
 
   return (
     <>

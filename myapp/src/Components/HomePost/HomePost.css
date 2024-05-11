@@ -10,6 +10,7 @@
   border-radius: 20px;
   padding: 10px;
   margin-bottom: 20px;
+  text-align: start;
 }
 .homepost-main:hover {
   box-shadow: 2px 2px 12px 0px #dba570;
@@ -38,6 +39,7 @@
 }
 .homepost {
   display: flex;
+  margin: 0px 30px;
 }
 .homepost-content {
   flex: 1;
@@ -52,14 +54,18 @@
 }
 .homepost-image {
   margin-left: 20px;
-
+  /* box-shadow: 2px 2px 12px 0px #dba570; */
+  /* box-shadow: #dba570 0px 5px 15px; */
+  box-shadow: #dba570 1px 0px 11px 0px;
+  border-radius: 10px;
   height: 75px;
   width: 80px;
-  background-color: red;
+  /* background-color: red; */
 }
 .homepost-img {
   height: 100%;
   width: 100%;
+  border-radius: 10px;
 }
 .homepost-footer {
   display: flex;

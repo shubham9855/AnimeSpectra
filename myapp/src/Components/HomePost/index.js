@@ -137,9 +137,14 @@ export const HomePost = () => {
               onClick={() => handleNavigate(item.postId)}
             >
               <div className="homepost-content">{item.title}</div>
-              <div className="homepost-image">
-                <img src={iconImage} className="homepost-img"></img>
-              </div>
+              {item.images.length > 0 && (
+                <div className="homepost-image">
+                  <img
+                    src={item.images[0].imageUrl}
+                    className="homepost-img"
+                  ></img>
+                </div>
+              )}
             </div>
             <hr></hr>
             <div className="homepost-footer">
@@ -182,7 +187,36 @@ export const HomePost = () => {
                 className="homepost-comment"
                 onClick={() => handleNavigate(item.postId)}
               >
-                Comment
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clipPath="url(#clip0_901_2831)">
+                    <path
+                      d="M24 25H2C1.45 25 1 24.55 1 24V2C1 1.45 1.45 1 2 1H30C30.55 1 31 1.45 31 2V30C31 31 30.61 31.61 29 30L24 25Z"
+                      fill="#dba570"
+                    />
+                    <path
+                      d="M22 12C22.55 12 23 12.45 23 13C23 13.55 22.55 14 22 14C21.45 14 21 13.55 21 13C21 12.45 21.45 12 22 12ZM16 12C16.55 12 17 12.45 17 13C17 13.55 16.55 14 16 14C15.45 14 15 13.55 15 13C15 12.45 15.45 12 16 12ZM10 12C10.55 12 11 12.45 11 13C11 13.55 10.55 14 10 14C9.45 14 9 13.55 9 13C9 12.45 9.45 12 10 12Z"
+                      fill="#dba570"
+                    />
+                    <path
+                      d="M22 23L29 30C30.609 31.609 31 31 31 30V2C31 1.447 30.553 1 30 1H2C1.447 1 1 1.447 1 2V24C1 24.553 1.447 25 2 25H20M17 12.9912C17 12.4382 16.553 11.9912 16 11.9912C15.447 11.9912 15 12.4382 15 12.9912C15 13.5442 15.447 13.9912 16 13.9912C16.553 13.9912 17 13.5442 17 12.9912ZM23 12.9912C23 12.4382 22.553 11.9912 22 11.9912C21.447 11.9912 21 12.4382 21 12.9912C21 13.5442 21.447 13.9912 22 13.9912C22.553 13.9912 23 13.5442 23 12.9912ZM11 12.9912C11 12.4382 10.553 11.9912 10 11.9912C9.447 11.9912 9 12.4382 9 12.9912C9 13.5442 9.447 13.9912 10 13.9912C10.553 13.9912 11 13.5442 11 12.9912Z"
+                      stroke="#000000"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_901_2831">
+                      <rect width="32" height="32" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
               </div>
             </div>
           </div>

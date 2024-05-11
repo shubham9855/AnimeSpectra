@@ -20,7 +20,6 @@ export const Communities = () => {
     //       throw new Error("Network response was not ok");
     //     }
     //     const data = await res.json();
-    //     console.log(data.communities);
     //     setCommunityJson(data.communities);
     //     setLoading(false);
     //   } catch (error) {
@@ -29,8 +28,6 @@ export const Communities = () => {
     //   }
     // };
     // fetchData();
-    // setLoading(false);
-    console.log(CommunityJson);
     setCommunityData(CommunityJson);
   }, []);
 
@@ -47,7 +44,7 @@ export const Communities = () => {
         <div className="communities-heading">Communities</div>
         <hr></hr>
         <div className="communities-main-container">
-          {CommunityJson.map((item) => {
+          {Communitydata.map((item) => {
             return (
               <Link
                 to={`/communities/${item.communityId}`}

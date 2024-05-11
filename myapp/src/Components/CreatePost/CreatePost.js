@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import "./CreatePost.css";
 import { useState, useEffect } from "react";
+import CommunityJson from "../../CommunityJson";
 
 export const CreatePost = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-
+  const [Communitydata, setCommunityData] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
+  const [selectedId, setSelectedId] = useState("");
   const [imageUpload, setImageUpload] = useState(false);
   const [title, setTitle] = useState("");
   const [TitleDesc, setTitleDesc] = useState("");
@@ -19,6 +21,24 @@ export const CreatePost = () => {
     if (token === null) {
       navigate("/login");
     }
+    // const fetchData = async () => {
+    //   try {
+    //     const res = await fetch(
+    //       `${process.env.REACT_APP_BACKEND_URL}/api/communities`
+    //     );
+    //     if (!res.ok) {
+    //       throw new Error("Network response was not ok");
+    //     }
+    //     const data = await res.json();
+    //     setCommunityJson(data.communities);
+    //     setLoading(false);
+    //   } catch (error) {
+    //     setError(error);
+    //     setLoading(false);
+    //   }
+    // };
+    // fetchData();
+    setCommunityData(CommunityJson);
   }, []);
 
   const handleFileChange = (e) => {
@@ -26,7 +46,13 @@ export const CreatePost = () => {
   };
 
   const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+    let option = event.target.value;
+    let id = "";
+    CommunityJson.map((item) => {
+      if (option === item.communityName) id = item.communityId;
+    });
+    setSelectedId(id);
+    setSelectedOption(option);
   };
 
   const changeFlag = (val) => {
@@ -102,9 +128,11 @@ export const CreatePost = () => {
         <div className="form-dropDown">
           <select value={selectedOption} onChange={handleOptionChange}>
             <option value="">Choose a Community</option>
-            <option value="option1">Option 1</option>
-            <option value="option2">shubh</option>
-            <option value="option3">shubham</option>
+            {CommunityJson.map((item) => {
+              return (
+                <option value={item.communityName}>{item.communityName}</option>
+              );
+            })}
           </select>
         </div>
 
