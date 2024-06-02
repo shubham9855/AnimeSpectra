@@ -4,6 +4,7 @@ import iconImage from "../../images/jjk.jpg";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch, useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
 import {
   faThumbsUp,
@@ -11,13 +12,17 @@ import {
   faComment,
   faHeart,
 } from "@fortawesome/free-regular-svg-icons";
+import { setpost } from "../../redux/action/postaction";
+import Post from "../Post/Post";
+import { dislikepost } from "../../redux/action/postaction";
+import { likepost } from "../../redux/action/postaction";
 
 export const HomePost = () => {
   const [like, setLike] = useState(0);
-  const [PostJson, setPostJson] = useState([]);
+  const dispatch = useDispatch();
+  const PostJson = useSelector((state) => state.postreducer.post);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [isLiked, setisLiked] = useState(false);
   const token = localStorage.getItem("token");
   const { decodedToken, isExpired } = useJwt(token);
 
@@ -36,7 +41,9 @@ export const HomePost = () => {
           throw new Error("Network response was not ok");
         }
         const post = await response.json();
-        setPostJson(post?.posts);
+        console.log("home post posts ", post?.posts);
+        dispatch(setpost(post?.posts));
+
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -45,7 +52,7 @@ export const HomePost = () => {
     };
 
     fetchData();
-  }, [like]);
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -59,6 +66,8 @@ export const HomePost = () => {
       navigate("/login");
     }
     try {
+      console.log("before dislike dispatch");
+      dispatch(dislikepost({ postId: id, userId: decodedToken.userId }));
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/votes`,
         {
@@ -73,10 +82,8 @@ export const HomePost = () => {
         }
       );
       if (!response.ok) {
-        throw new Error("delete like failed");
+        throw new Error("Failed to Dislike");
       }
-      setLike(1);
-      // window.location.reload();
     } catch (error) {
       setError(error.message);
     }
@@ -86,6 +93,7 @@ export const HomePost = () => {
       navigate("/login");
     }
     try {
+      dispatch(likepost({ postId: id, userId: decodedToken.userId }));
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/votes`,
         {
@@ -103,8 +111,6 @@ export const HomePost = () => {
       if (!response.ok) {
         throw new Error("like failed");
       }
-      setLike(15);
-      // window.location.reload();
     } catch (error) {
       setError(error.message);
     }
@@ -151,6 +157,7 @@ export const HomePost = () => {
               <div className="homepost-upvote">
                 {isLiked ? (
                   <svg
+                    className="homepost-like"
                     width="20px"
                     height="20px"
                     viewBox="0 0 24 24"
@@ -166,6 +173,7 @@ export const HomePost = () => {
                   </svg>
                 ) : (
                   <svg
+                    className="homepost-like"
                     width="18px"
                     height="18px"
                     viewBox="0 0 24 24"
@@ -188,6 +196,7 @@ export const HomePost = () => {
                 onClick={() => handleNavigate(item.postId)}
               >
                 <svg
+                  className="homepost-like"
                   width="20"
                   height="20"
                   viewBox="0 0 32 32"

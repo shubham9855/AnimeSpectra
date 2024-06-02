@@ -8,28 +8,38 @@ import { useParams, useNavigate } from "react-router-dom";
 import Comments from "../Comment/Comments";
 import { useJwt } from "react-jwt";
 // import "./styles.css";
-
-const comments = {
-  id: 1,
-  items: [],
-};
-// var likes = 500;
+import { useDispatch, useSelector } from "react-redux";
+import { likepost } from "../../redux/action/postaction";
+import { dislikepost } from "../../redux/action/postaction";
+import { setpost } from "../../redux/action/postaction";
+import {
+  setcommentspost,
+  setpostdislike,
+  setpostlike,
+} from "../../redux/action/commentaction";
 
 const Post = () => {
   // const [commentsData, setCommentsData] = useState(comments);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const postData = useSelector((state) => state.commentreducer.post);
+  console.log("post data from selector", postData);
+  let isLiked = false;
   const [like, setLike] = useState(0);
+  // setLike(postData?.likes?.length);
   const [val, setVal] = useState(0);
-  const [postData, setPostData] = useState({});
+  // const [postData, setPostData] = useState({});
   // const [isLiked, setisLiked] = useState(false);
   const [Loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const { id } = useParams();
   const token = localStorage.getItem("token");
+  // console.log(token);
   const { decodedToken, isExpired } = useJwt(token);
 
   useEffect(() => {
+    console.log("POST useEffect executed");
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -39,17 +49,18 @@ const Post = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setPostData(data.post);
-        setLike(data.post.likes.length);
+        // setPostData(data.post);
+        dispatch(setcommentspost(data.post));
+        setLike(data.post?.likes?.length);
+        console.log("post data", data.post);
         setLoading(false);
       } catch (error) {
         setError(error);
         setLoading(false);
       }
     };
-
     fetchData();
-  }, [val]);
+  }, []);
 
   if (Loading) {
     return <div>Loading...</div>;
@@ -58,12 +69,6 @@ const Post = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-  let isLiked = false;
-  if (token !== null) {
-    postData.likes.map((obj) => {
-      if (obj?.userId === decodedToken?.userId) isLiked = true;
-    });
-  }
 
   const handleDislikeClick = async (id) => {
     if (token === null) {
@@ -71,6 +76,7 @@ const Post = () => {
     }
 
     try {
+      dispatch(setpostdislike({ postId: id, userId: decodedToken.userId }));
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/votes`,
         {
@@ -87,8 +93,7 @@ const Post = () => {
       if (!response.ok) {
         throw new Error("delete like failed");
       }
-      setVal(1);
-      isLiked = false;
+      // isLiked = false;
       // window.location.reload();
     } catch (error) {
       setError(error.message);
@@ -100,6 +105,8 @@ const Post = () => {
     }
 
     try {
+      dispatch(setpostlike({ postId: id, userId: decodedToken.userId }));
+      isLiked = false;
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/votes`,
         {
@@ -117,34 +124,40 @@ const Post = () => {
       if (!response.ok) {
         throw new Error("like failed");
       }
-      setVal(3);
-      isLiked = true;
-      // window.location.reload();
     } catch (error) {
       setError(error.message);
     }
   };
 
+  if (token !== null) {
+    postData?.likes?.map((obj) => {
+      console.log(obj?.userId);
+      // console.log(tokendata);
+      if (obj?.userId === decodedToken?.userId) isLiked = true;
+    });
+  }
+  // setLike(postData?.likes?.length);
+  // console.log("like count", like);
   return (
     <div className="postCompnent-post-container">
       <div className="postCompnent-icon-container">
         <div className="postCompnent-icon-image">
-          <img src={postData.user.profileUrl} />
+          <img src={postData.user?.profileUrl} />
         </div>
         <div className="postCompnent-icon-name">
-          <span>{postData.user.userName}</span>
+          <span>{postData.user?.userName}</span>
         </div>
         <div className="postCompnent-icon-date"></div>
       </div>
       <div className="postCompnent-post-content">
         <div className="postCompnent-post-title">
-          <span>{postData.title}</span>
+          <span>{postData?.title}</span>
         </div>
         <div className="postCompnent-post-desc">
-          <span>{postData.description}</span>
+          <span>{postData?.description}</span>
         </div>
         <div className="postCompnent-post-image-box">
-          {postData.images.map((item) => {
+          {postData.images?.map((item) => {
             return (
               <div className="postCompnent-post-image">
                 <img
@@ -162,6 +175,7 @@ const Post = () => {
           <div className="postComponent-like">
             {isLiked ? (
               <svg
+                className="homepost-like"
                 width="25px"
                 height="25px"
                 viewBox="0 0 24 24"
@@ -177,6 +191,7 @@ const Post = () => {
               </svg>
             ) : (
               <svg
+                className="homepost-like"
                 width="23px"
                 height="23px"
                 viewBox="0 0 24 24"
@@ -193,14 +208,14 @@ const Post = () => {
               </svg>
             )}
           </div>
-          <span>{like}</span>
+          <span>{postData?.likes?.length}</span>
         </div>
       </div>
       <div className="comment">
         <Comments
           postID={id}
-          commentData={postData.comments}
-          currentUserId={postData.userId}
+          commentData={postData?.comments}
+          currentUserId={postData?.userId}
         ></Comments>
       </div>
     </div>

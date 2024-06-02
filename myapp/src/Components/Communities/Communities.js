@@ -11,24 +11,25 @@ export const Communities = () => {
   const [Loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const res = await fetch(
-    //       `${process.env.REACT_APP_BACKEND_URL}/api/communities`
-    //     );
-    //     if (!res.ok) {
-    //       throw new Error("Network response was not ok");
-    //     }
-    //     const data = await res.json();
-    //     setCommunityJson(data.communities);
-    //     setLoading(false);
-    //   } catch (error) {
-    //     setError(error);
-    //     setLoading(false);
-    //   }
-    // };
-    // fetchData();
-    setCommunityData(CommunityJson);
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/communities`
+        );
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await res.json();
+        setCommunityData(data.communities);
+        console.log(data.communities);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+    fetchData();
+    // setCommunityData(CommunityJson);
   }, []);
 
   // if (Loading) {
