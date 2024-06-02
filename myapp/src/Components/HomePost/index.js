@@ -41,7 +41,6 @@ export const HomePost = () => {
           throw new Error("Network response was not ok");
         }
         const post = await response.json();
-        console.log("home post posts ", post?.posts);
         dispatch(setpost(post?.posts));
 
         setLoading(false);
@@ -66,7 +65,6 @@ export const HomePost = () => {
       navigate("/login");
     }
     try {
-      console.log("before dislike dispatch");
       dispatch(dislikepost({ postId: id, userId: decodedToken.userId }));
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/votes`,

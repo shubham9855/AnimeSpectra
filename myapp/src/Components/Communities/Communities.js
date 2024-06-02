@@ -21,7 +21,6 @@ export const Communities = () => {
         }
         const data = await res.json();
         setCommunityData(data.communities);
-        console.log(data.communities);
         setLoading(false);
       } catch (error) {
         setError(error);

@@ -24,22 +24,15 @@ const Post = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const postData = useSelector((state) => state.commentreducer.post);
-  console.log("post data from selector", postData);
   let isLiked = false;
   const [like, setLike] = useState(0);
-  // setLike(postData?.likes?.length);
-  const [val, setVal] = useState(0);
-  // const [postData, setPostData] = useState({});
-  // const [isLiked, setisLiked] = useState(false);
   const [Loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
   const token = localStorage.getItem("token");
-  // console.log(token);
   const { decodedToken, isExpired } = useJwt(token);
 
   useEffect(() => {
-    console.log("POST useEffect executed");
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -49,10 +42,8 @@ const Post = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        // setPostData(data.post);
         dispatch(setcommentspost(data.post));
         setLike(data.post?.likes?.length);
-        console.log("post data", data.post);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -131,13 +122,9 @@ const Post = () => {
 
   if (token !== null) {
     postData?.likes?.map((obj) => {
-      console.log(obj?.userId);
-      // console.log(tokendata);
       if (obj?.userId === decodedToken?.userId) isLiked = true;
     });
   }
-  // setLike(postData?.likes?.length);
-  // console.log("like count", like);
   return (
     <div className="postCompnent-post-container">
       <div className="postCompnent-icon-container">
