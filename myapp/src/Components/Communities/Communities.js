@@ -31,13 +31,13 @@ export const Communities = () => {
     // setCommunityData(CommunityJson);
   }, []);
 
-  // if (Loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (Loading) {
+    return <div>Loading...</div>;
+  }
 
-  // if (error) {
-  //   return <div>Error: {error.message}</div>;
-  // }
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
   return (
     <>
       <div className="main-community">

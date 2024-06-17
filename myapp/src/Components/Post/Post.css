@@ -1,7 +1,7 @@
 .postCompnent-post-container {
   /* margin: 0 3.4rem; */
   margin-top: 100px;
-  width: 50%;
+  width: 60%;
   height: fit-content;
   padding: 14px 14px 0px 14px;
   background-color: #000a13;
@@ -188,6 +188,6 @@
 
 @media (max-width: 767px) {
   .postCompnent-post-container {
-    width: 75%;
+    width: 85%;
   }
 }

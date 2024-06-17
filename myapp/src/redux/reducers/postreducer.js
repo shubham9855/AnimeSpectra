@@ -5,45 +5,64 @@ const initialState = {
 export const postreducer = (state = initialState, action) => {
   switch (action.type) {
     case "LIKE_POST":
-      let partPost = {};
-      state.post.forEach((obj) => {
-        if (obj.postId === action.payload.postId) partPost = { ...obj };
-      });
+      // let partPost = {};
+      // state.post.forEach((obj) => {
+      //   if (obj.postId === action.payload.postId) partPost = { ...obj };
+      // });
 
-      partPost = {
-        ...partPost,
-        likes: [
-          ...partPost.likes,
-          { likeType: "like", userId: action.payload.userId },
-        ],
-      };
-      const finPost = state.post.filter((item) => {
-        return item.postId !== partPost.postId;
-      });
+      // partPost = {
+      //   ...partPost,
+      //   likes: [
+      //     ...partPost.likes,
+      //     { likeType: "like", userId: action.payload.userId },
+      //   ],
+      // };
+      // const finPost = state.post.filter((item) => {
+      //   return item.postId !== partPost.postId;
+      // });
       return {
         ...state,
-        post: [...finPost, partPost],
+        post: state.post.map((post) =>
+          post.postId === action.payload.postId
+            ? {
+                ...post,
+                likes: [
+                  ...post.likes,
+                  { likeType: "like", userId: action.payload.userId },
+                ],
+              }
+            : post
+        ),
       };
 
     case "DISLIKE_POST":
-      let particularPost = {};
-      state.post.forEach((obj) => {
-        if (obj.postId === action.payload.postId) particularPost = { ...obj };
-      });
+      // let particularPost = {};
+      // state.post.forEach((obj) => {
+      //   if (obj.postId === action.payload.postId) particularPost = { ...obj };
+      // });
 
-      particularPost = {
-        ...particularPost,
-        likes: particularPost.likes.filter((item) => {
-          return item?.userId !== action.payload.userId;
-        }),
-      };
+      // particularPost = {
+      //   ...particularPost,
+      //   likes: particularPost.likes.filter((item) => {
+      //     return item?.userId !== action.payload.userId;
+      //   }),
+      // };
 
-      const finalPost = state.post.filter((item) => {
-        return item.postId !== particularPost.postId;
-      });
+      // const finalPost = state.post.filter((item) => {
+      //   return item.postId !== particularPost.postId;
+      // });
       return {
         ...state,
-        post: [...finalPost, particularPost],
+        post: state.post.map((post) =>
+          post.postId === action.payload.postId
+            ? {
+                ...post,
+                likes: post.likes.filter((item) => {
+                  return item?.userId !== action.payload.userId;
+                }),
+              }
+            : post
+        ),
       };
 
     case "SET_POSTS":
