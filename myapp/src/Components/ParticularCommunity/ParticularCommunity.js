@@ -9,19 +9,21 @@ export const ParticularCommunity = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  console.log("id", id);
   useEffect(() => {
     // particular community fetch will get me all the post of that community and this particular comm. data
 
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/api/communities`
+          `${process.env.REACT_APP_BACKEND_URL}/api/communities/id`
         );
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await res.json();
-        setCommunityJson(data.communities.find((s) => s.communityId === id));
+        console.log("data", data);
+        setCommunityJson(data.posts);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -53,7 +55,7 @@ export const ParticularCommunity = () => {
         <hr></hr>
         <div className="particular-body">
           <div className="particular-content">
-            <HomePost />
+            <HomePost Posts={CommunityJson} />
           </div>
         </div>
       </div>

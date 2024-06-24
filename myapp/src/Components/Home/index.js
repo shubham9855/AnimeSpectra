@@ -1,15 +1,54 @@
 import { HomePost } from "../HomePost";
 import { useNavigate } from "react-router-dom";
 import { isExpired, useJwt } from "react-jwt";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { setpost } from "../../redux/action/postaction";
 import "./Home.css";
 
 export const Home = () => {
+  const dispatch = useDispatch();
+  const PostJson = useSelector((state) => state.postreducer.post);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const { decodedToken, isExpired } = useJwt(token);
   const handleFocus = () => {
     navigate("/createpost");
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/posts`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const post = await response.json();
+        dispatch(setpost(post?.posts));
+
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
     <>
       <div className="home-main-container">
@@ -31,7 +70,7 @@ export const Home = () => {
           </div>
         </div>
 
-        <HomePost />
+        <HomePost Posts={PostJson} />
       </div>
     </>
   );

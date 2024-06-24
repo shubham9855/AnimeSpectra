@@ -16,7 +16,7 @@
   height: 350px;
 }
 .thumbnail-img {
-  background-image: url("../../images/one-piece.jpg");
+  /* background-image: url("../../images/one-piece.jpg"); */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;

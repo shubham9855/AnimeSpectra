@@ -5,11 +5,15 @@ import one_piece from "../../images/one-piece.jpg";
 import CommunityJson from "../../CommunityJson";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setcommunity } from "../../redux/action/communityaction";
 
 export const Communities = () => {
   const [Communitydata, setCommunityData] = useState([]);
   const [Loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,6 +24,8 @@ export const Communities = () => {
           throw new Error("Network response was not ok");
         }
         const data = await res.json();
+        console.log("community", data);
+        dispatch(setcommunity(data.communities));
         setCommunityData(data.communities);
         setLoading(false);
       } catch (error) {

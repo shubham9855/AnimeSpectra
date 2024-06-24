@@ -5,6 +5,7 @@ import { Router, Route, Routes } from "react-router-dom";
 import { Sidebar } from "./Components/Sidebar/Sidebar";
 import { HomePost, Home } from "./Components";
 import { Communities } from "./Components/Communities/Communities";
+import { Game } from "./Components/Game/Game";
 import { Login } from "./Components/Login/Login";
 import { Register } from "./Components/Register/Register";
 import { SidebarLayout } from "./Components/SidebarLayout";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" Component={Login}></Route>
         <Route path="/register" Component={Register}></Route>
         <Route path="/communities" Component={Communities}></Route>
+        {/* <Route path="/communities" Component={Game}></Route> */}
         <Route path="/createpost" Component={CreatePost}></Route>
         <Route path="/post/:id" Component={Post}></Route>
         {/* <Route path="/post" Component={Post}></Route> */}

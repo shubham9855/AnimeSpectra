@@ -25,6 +25,7 @@
 }
 .sidebar-box {
   width: 70%;
+  height: 100px;
   background-color: #011525;
   margin-top: 20px;
   border-radius: 15px;

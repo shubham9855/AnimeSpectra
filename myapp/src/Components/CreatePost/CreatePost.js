@@ -21,24 +21,24 @@ export const CreatePost = () => {
     if (token === null) {
       navigate("/login");
     }
-    // const fetchData = async () => {
-    //   try {
-    //     const res = await fetch(
-    //       `${process.env.REACT_APP_BACKEND_URL}/api/communities`
-    //     );
-    //     if (!res.ok) {
-    //       throw new Error("Network response was not ok");
-    //     }
-    //     const data = await res.json();
-    //     setCommunityJson(data.communities);
-    //     setLoading(false);
-    //   } catch (error) {
-    //     setError(error);
-    //     setLoading(false);
-    //   }
-    // };
-    // fetchData();
-    setCommunityData(CommunityJson);
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/communities`
+        );
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await res.json();
+        setCommunityData(data.communities);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+    fetchData();
+    // setCommunityData(CommunityJson);
   }, []);
 
   const handleFileChange = (e) => {
@@ -63,7 +63,7 @@ export const CreatePost = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", TitleDesc);
-    formData.append("communityId", "5d2a58f2-5f1f-44ec-b9d8-756eda97426d");
+    formData.append("communityId", selectedId);
     // const fileObjects = [];
 
     // Append each file to the array
@@ -97,21 +97,6 @@ export const CreatePost = () => {
       setLoading(false);
     }
   };
-  const readFileAsBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        resolve(reader.result.split(",")[1]);
-      };
-
-      reader.onerror = (error) => {
-        reject(error);
-      };
-
-      reader.readAsDataURL(file);
-    });
-  };
 
   const selectedImageButtonStyle = imageUpload ? "image-button-selected" : "";
   const selectedButtonStyle = imageUpload ? "" : "post-button-selected";
@@ -128,7 +113,7 @@ export const CreatePost = () => {
         <div className="form-dropDown">
           <select value={selectedOption} onChange={handleOptionChange}>
             <option value="">Choose a Community</option>
-            {CommunityJson.map((item) => {
+            {Communitydata.map((item) => {
               return (
                 <option value={item.communityName}>{item.communityName}</option>
               );

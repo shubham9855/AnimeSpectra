@@ -17,12 +17,14 @@ import Post from "../Post/Post";
 import { dislikepost } from "../../redux/action/postaction";
 import { likepost } from "../../redux/action/postaction";
 
-export const HomePost = () => {
-  const [like, setLike] = useState(0);
-  const dispatch = useDispatch();
-  const PostJson = useSelector((state) => state.postreducer.post);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export const HomePost = ({ Posts }) => {
+  // console.log(Posts);
+  // const [like, setLike] = useState(0);
+  // const dispatch = useDispatch();
+  // const PostJson = useSelector((state) => state.postreducer.post);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
+
   const token = localStorage.getItem("token");
   const { decodedToken, isExpired } = useJwt(token);
 
@@ -31,35 +33,35 @@ export const HomePost = () => {
     navigate(`/post/${id}`);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/api/posts`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const post = await response.json();
-        dispatch(setpost(post?.posts));
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${process.env.REACT_APP_BACKEND_URL}/api/posts`
+  //       );
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       const post = await response.json();
+  //       dispatch(setpost(post?.posts));
 
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
+  //       setLoading(false);
+  //     } catch (error) {
+  //       setError(error);
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error.message}</div>;
+  // }
   const handleDislikeClick = async (id) => {
     if (token === null) {
       navigate("/login");
@@ -114,9 +116,16 @@ export const HomePost = () => {
     }
   };
 
+  if (Posts.length == 0)
+    return (
+      <>
+        <div className="NoPost">NO POSTS YET!!!</div>
+      </>
+    );
+
   return (
     <>
-      {PostJson.map((item) => {
+      {Posts.map((item) => {
         const postLike = item.likes.length;
         let isLiked = false;
         if (token !== null) {
