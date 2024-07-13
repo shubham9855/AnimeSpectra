@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./CreatePost.css";
 import { useState, useEffect } from "react";
-import CommunityJson from "../../CommunityJson";
+// import CommunityJson from "../../CommunityJson";
 
 export const CreatePost = () => {
   const token = localStorage.getItem("token");
@@ -30,6 +30,7 @@ export const CreatePost = () => {
           throw new Error("Network response was not ok");
         }
         const data = await res.json();
+        console.log(data.communities);
         setCommunityData(data.communities);
         setLoading(false);
       } catch (error) {
@@ -46,11 +47,14 @@ export const CreatePost = () => {
   };
 
   const handleOptionChange = (event) => {
+    console.log("option cahnge");
     let option = event.target.value;
+    console.log("target value", event.target.value);
     let id = "";
-    CommunityJson.map((item) => {
+    Communitydata.map((item) => {
       if (option === item.communityName) id = item.communityId;
     });
+    console.log("id", id);
     setSelectedId(id);
     setSelectedOption(option);
   };
@@ -61,6 +65,7 @@ export const CreatePost = () => {
 
   const handleClickPost = async () => {
     const formData = new FormData();
+    console.log(selectedId);
     formData.append("title", title);
     formData.append("description", TitleDesc);
     formData.append("communityId", selectedId);
@@ -70,6 +75,9 @@ export const CreatePost = () => {
     file.forEach((photo) => {
       formData.append("photos", photo);
     });
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
     setError(null);
     setLoading(true);
 
@@ -170,7 +178,11 @@ export const CreatePost = () => {
           )}
           <div className="form-buttonwrapper">
             <button className="form-button" onClick={handleClickPost}>
-              Post
+              {loading ? (
+                <div style={{ color: "black" }}>loading!!!</div>
+              ) : (
+                "Post"
+              )}
             </button>
           </div>
         </div>

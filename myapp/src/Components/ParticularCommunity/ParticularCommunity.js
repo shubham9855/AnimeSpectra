@@ -3,20 +3,27 @@ import { HomePost } from "../HomePost";
 // import CommunityJson from "../../CommunityJson";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export const ParticularCommunity = () => {
   const [CommunityJson, setCommunityJson] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { id } = useParams();
-  console.log("id", id);
+  const state = useSelector((state) => state.communityreducer.community);
+  console.log("com state", state);
+
+  const banner = state.filter((item) => item.communityId === id);
+
+  console.log("banner imge", banner[0].imageUrl);
+
   useEffect(() => {
     // particular community fetch will get me all the post of that community and this particular comm. data
 
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/api/communities/id`
+          `${process.env.REACT_APP_BACKEND_URL}/api/communities/${id}`
         );
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -46,11 +53,9 @@ export const ParticularCommunity = () => {
       <div className="particular-main">
         <div className="particular-header">
           <div className="thumnail-img-box">
-            <img className="thumbnail-img" src={CommunityJson.imageUrl}></img>
+            <img className="thumbnail-img" src={banner[0].imageUrl}></img>
           </div>
-          <div className="community-thumbnail">
-            {CommunityJson.communityName}
-          </div>
+          <div className="community-thumbnail">{banner[0].communityName}</div>
         </div>
         <hr></hr>
         <div className="particular-body">

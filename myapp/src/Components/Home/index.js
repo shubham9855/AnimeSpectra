@@ -4,6 +4,7 @@ import { isExpired, useJwt } from "react-jwt";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { setpost } from "../../redux/action/postaction";
+import { setcommunity } from "../../redux/action/communityaction";
 import "./Home.css";
 
 export const Home = () => {
@@ -11,6 +12,7 @@ export const Home = () => {
   const PostJson = useSelector((state) => state.postreducer.post);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [Communitydata, setCommunityData] = useState([]);
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -39,6 +41,26 @@ export const Home = () => {
     };
 
     fetchData();
+
+    const fetchComData = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/communities?limit=50`
+        );
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await res.json();
+        console.log("community", data);
+        dispatch(setcommunity(data.communities));
+        setCommunityData(data.communities);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+    fetchComData();
   }, []);
 
   if (loading) {

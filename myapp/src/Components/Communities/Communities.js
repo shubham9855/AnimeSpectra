@@ -2,7 +2,7 @@ import "./Communities.css";
 import one_piece from "../../images/one-piece.jpg";
 // import naruto from "../../images/naruto.jpeg";
 // import solo_leveling from "../../images/solo_leveling.jpeg";
-import CommunityJson from "../../CommunityJson";
+// import CommunityJson from "../../CommunityJson";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -18,7 +18,7 @@ export const Communities = () => {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/api/communities`
+          `${process.env.REACT_APP_BACKEND_URL}/api/communities?limit=50`
         );
         if (!res.ok) {
           throw new Error("Network response was not ok");

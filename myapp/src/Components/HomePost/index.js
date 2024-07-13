@@ -20,10 +20,10 @@ import { likepost } from "../../redux/action/postaction";
 export const HomePost = ({ Posts }) => {
   // console.log(Posts);
   // const [like, setLike] = useState(0);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const PostJson = useSelector((state) => state.postreducer.post);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const token = localStorage.getItem("token");
   const { decodedToken, isExpired } = useJwt(token);
@@ -63,11 +63,11 @@ export const HomePost = ({ Posts }) => {
   //   return <div>Error: {error.message}</div>;
   // }
   const handleDislikeClick = async (id) => {
+    console.log("dislike");
     if (token === null) {
       navigate("/login");
     }
     try {
-      dispatch(dislikepost({ postId: id, userId: decodedToken.userId }));
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/votes`,
         {
@@ -81,6 +81,7 @@ export const HomePost = ({ Posts }) => {
           }),
         }
       );
+      dispatch(dislikepost({ postId: id, userId: decodedToken.userId }));
       if (!response.ok) {
         throw new Error("Failed to Dislike");
       }
@@ -89,11 +90,11 @@ export const HomePost = ({ Posts }) => {
     }
   };
   const handleLikeClick = async (id) => {
+    console.log("like");
     if (token === null) {
       navigate("/login");
     }
     try {
-      dispatch(likepost({ postId: id, userId: decodedToken.userId }));
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/votes`,
         {
@@ -108,6 +109,9 @@ export const HomePost = ({ Posts }) => {
           }),
         }
       );
+      console.log("re", response);
+      dispatch(likepost({ postId: id, userId: decodedToken.userId }));
+      console.log("after");
       if (!response.ok) {
         throw new Error("like failed");
       }

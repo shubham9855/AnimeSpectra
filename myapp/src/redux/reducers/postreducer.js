@@ -5,6 +5,7 @@ const initialState = {
 export const postreducer = (state = initialState, action) => {
   switch (action.type) {
     case "LIKE_POST":
+      console.log("like red");
       // let partPost = {};
       // state.post.forEach((obj) => {
       //   if (obj.postId === action.payload.postId) partPost = { ...obj };
@@ -36,6 +37,7 @@ export const postreducer = (state = initialState, action) => {
       };
 
     case "DISLIKE_POST":
+      console.log("dislike red");
       // let particularPost = {};
       // state.post.forEach((obj) => {
       //   if (obj.postId === action.payload.postId) particularPost = { ...obj };
